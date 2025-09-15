@@ -10,7 +10,7 @@ type Character struct {
 	Level      int
 	Pv         int
 	Pvmax      int
-	Inventaire []Items
+	Inventory []Items
 }
 
 type Items struct {
@@ -43,8 +43,8 @@ func initCharacter() {
 		}
 	}
 	PotionSoin := Items{"potions de soin", 3, "soin", 20, "all"}
-	FirstCharacter = Character{nom, "Elfe", 1, 40, 100, []Items{PotionSoin}} // = au lieu de :=
-	fmt.Println("tu as désormais", FirstCharacter.Inventaire[0].Quantity, FirstCharacter.Inventaire[0].Name)
+	FirstCharacter = Character{nom, "Elfe", 1, 40, 100, []Items{PotionSoin}}
+	fmt.Println("tu as désormais", FirstCharacter.Inventory[0].Quantity, FirstCharacter.Inventory[0].Name)
 }
 
 func DisplayInfo(p Character) {
@@ -53,14 +53,14 @@ func DisplayInfo(p Character) {
 	fmt.Println("Niveau :", p.Level)
 	fmt.Println("Points de vie actuels :", p.Pv)
 	fmt.Println("Points de vie max :", p.Pvmax)
-	for i := 0; i < len(p.Inventaire); i++ {
-		fmt.Println("tu as", p.Inventaire[i].Quantity, p.Inventaire[i].Name)
+	for i := 0; i < len(p.Inventory); i++ {
+		fmt.Println("tu as", p.Inventory[i].Quantity, p.Inventory[i].Name)
 	}
 }
 
 func accessInventory(FirstCharacter Character) {
-	for i := 0; i < len(FirstCharacter.Inventaire); i++ {
-		fmt.Println(FirstCharacter.Inventaire[i].Name, FirstCharacter.Inventaire[i].Quantity)
+	for i := 0; i < len(FirstCharacter.Inventory); i++ {
+		fmt.Println(FirstCharacter.Inventory[i].Name, FirstCharacter.Inventory[i].Quantity)
 
 	}
 }
