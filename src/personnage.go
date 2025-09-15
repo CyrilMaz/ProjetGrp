@@ -58,7 +58,15 @@ func DisplayInfo(p Character) {
 	}
 }
 
+func accessInventory(FirstCharacter Character) {
+	for i := 0; i < len(FirstCharacter.Inventaire); i++ {
+		fmt.Println(FirstCharacter.Inventaire[i].Name, FirstCharacter.Inventaire[i].Quantity)
+
+	}
+}
+
 func main() {
 	initCharacter()
-	DisplayInfo(FirstCharacter) // Maintenant FirstCharacter est accessible
+	DisplayInfo(FirstCharacter)
+	accessInventory(FirstCharacter)
 }
