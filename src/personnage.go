@@ -7,17 +7,17 @@ import (
 type Character struct {
 	Name       string
 	Class      string
-	level      int
-	pv         int
-	pvmax      int
-	inventaire []Items
+	Level      int
+	Pv         int
+	Pvmax      int
+	Inventaire []Items
 }
 
 type Items struct {
-	name string
-	quantity int
-	statName string
-	statBoost int
+	Name string
+	Quantity int
+	StatName string
+	StatBoost int
 	RespectiveClass string
 }
 
@@ -37,6 +37,7 @@ func main() {
 		fmt.Scanln(&nom)
 	}
 	fmt.Println("Ton nom est : " + nom)
-	FirstCharacter := Character{nom, "Elfe", 1, 40, 100, []Items{}}
-	fmt.Println(FirstCharacter.inventaire)
+	PotionSoin := Items{"potion de soin", 1, "soin", 20, "all"}
+	FirstCharacter := Character{nom, "Elfe", 1, 40, 100, []Items{PotionSoin}}
+	fmt.Println(FirstCharacter.Inventaire[0].Name)
 }
