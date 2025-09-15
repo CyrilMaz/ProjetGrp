@@ -1,0 +1,8 @@
+############################
+# Fonctionnement du combat #
+############################
+
+# Regles
+
+-Tour par Tour
+-1 vs 1 minimum
