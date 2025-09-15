@@ -1,7 +1,5 @@
 package Projetgrp
 
-import "fmt"
-
 type Items struct {
 	name string
 	quantity int
