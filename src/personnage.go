@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Character struct {
 	Name       string
@@ -8,7 +10,15 @@ type Character struct {
 	level      int
 	pv         int
 	pvmax      int
-	inventaire []string
+	inventaire []Items
+}
+
+type Items struct {
+	name string
+	quantity int
+	statName string
+	statBoost int
+	RespectiveClass string
 }
 
 func main() {
@@ -27,4 +37,6 @@ func main() {
 		fmt.Scanln(&nom)
 	}
 	fmt.Println("Ton nom est : " + nom)
+	FirstCharacter := Character{nom, "Elfe", 1, 40, 100, []Items{}}
+	fmt.Println(FirstCharacter.inventaire)
 }
