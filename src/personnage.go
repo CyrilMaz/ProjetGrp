@@ -21,7 +21,7 @@ type Items struct {
 	RespectiveClass string
 }
 
-func main() {
+func initCharacter() {
 	var nom string
 	fmt.Println("Quel est le nom de ton personnage")
 	fmt.Scanln(&nom) // scan le nom du personnage
@@ -37,7 +37,7 @@ func main() {
 		fmt.Scanln(&nom)
 	}
 	fmt.Println("Ton nom est : " + nom)
-	PotionSoin := Items{"potion de soin", 1, "soin", 20, "all"}
+	PotionSoin := Items{"potion de soin", 3, "soin", 20, "all"}
 	FirstCharacter := Character{nom, "Elfe", 1, 40, 100, []Items{PotionSoin}}
-	fmt.Println(FirstCharacter.Inventaire[0].Name)
+	fmt.Println(FirstCharacter.Inventaire[0].Name, FirstCharacter.Inventaire[0].Quantity)
 }
