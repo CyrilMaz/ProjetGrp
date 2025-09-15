@@ -1,3 +1,7 @@
+package Projetgrp
+
+import "fmt"
+
 type Items struct {
 	name string
 	quantity int
@@ -7,4 +11,8 @@ type Items struct {
 	EXP int
 	NextLvlExp int
 	RespectiveClass string
+}
+
+func ShowItems() {
+	fmt.Println()
 }
