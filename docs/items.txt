@@ -1,0 +1,13 @@
+#############################
+# Fonctionnement des objets #
+#############################
+
+# REGLES
+- 1 statistique minimum ( à voir avec des raretés )
+- 1 niveau ( la montée de niveau augmente les stats )
+- 1 seuil d'exp nécessaire pour passer au niveau suivant
+- plusieurs type d'objets respectif à certaines classes ( mage, guerrier )
+ 
+# COMMANDES
+
+- afficher les stats -> Statistique de l'objet / Le niveau / L'exp de l'objet

@@ -1,0 +1,15 @@
+##############################
+# Fonctionnement de la forge #
+##############################
+
+# COMMANDES
+
+-afficher l'inventaire du personnage
+
+-afficher les stats de l'équipement 
+
+-la forge peut augmenter le niveau d'un objet
+
+# REGLES
+
+-Sélection des objets limitée à 1 pour l'amélioration
