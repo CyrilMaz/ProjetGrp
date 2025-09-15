@@ -1,0 +1,29 @@
+
+
+
+####################################
+######création du personnage########
+####################################
+
+TACHE 1 : création du personnage
+																
+- donner un nom au personnage
+
+- lui donner une classe (minimum 2 classes guerrier et mage)
+	
+- attribuer un niveau qui augmente en fonction de l'exp
+
+- définir pv ( les pv max augmente en fonction des niveaux)
+
+- pv actuels pouvant varier selon les coup des adversaires
+
+- definir inventaire ( l'inventaire doit avoir une limite de stockage)
+
+
+
+
+	
+
+	
+	
+		
