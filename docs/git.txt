@@ -1,0 +1,9 @@
+#################################
+# Envoyer des fichiers avec git #
+#################################
+
+$git add "nom du fichier" ou . pour tout sélectionner
+
+$git commit -m "MESSAGE" -> (ADD file, FIX file, DELETE file, MODIFY file)
+
+$git push
