@@ -12,7 +12,3 @@ type Items struct {
 	NextLvlExp int
 	RespectiveClass string
 }
-
-func ShowItems() {
-	fmt.Println()
-}
