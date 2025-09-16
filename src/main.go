@@ -2,10 +2,14 @@ package main
 
 import "fmt"
 
+var initalized bool = false
 var answer string 
 
 func main() {
-	initCharacter()
+	if initalized == false {
+		initCharacter()
+		initalized = true
+	}
 	for answer != "0" {
 		fmt.Println("\nQue voulez-vous faire ?")
 		for i := 0; i < len(MENU01); i++ {
@@ -21,7 +25,7 @@ func main() {
 		case "2":
 			accessInventory(FirstCharacter)
 		case "0":
-			fmt.Println("Au revoir Cyril !")
+			fmt.Println("Au revoir", FirstCharacter.Name, "!")
 		default:
 			fmt.Println("Choix invalide, réessayez.")
 		}
