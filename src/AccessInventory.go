@@ -6,11 +6,19 @@ var answer1 int
 var answer2 string
 var UseItem bool = false 
 
+/*#############################
+  # AFFICHAGE DE L'INVENTAIRE #
+  #############################*/
 func accessInventory(FirstCharacter Character) {
 	fmt.Println("===============INVENTAIRE================")
 	for i := 0; i < len(FirstCharacter.Inventory); i++ {
 		fmt.Println(i, ":", FirstCharacter.Inventory[i].Name,", quantité :",FirstCharacter.Inventory[i].Quantity)
 	}
+
+
+	/*######################
+	  # GESTION DES OBJETS #
+	  ######################*/
 	fmt.Println("================ACTIONS==================")
 	fmt.Println("tapez un numéro pour utiliser un objet, sinon tapez \"exit\"")
 	fmt.Scanln(&answer1)
@@ -24,7 +32,7 @@ func accessInventory(FirstCharacter Character) {
 				FirstCharacter.Inventory[answer1].Quantity -= 1
 				fmt.Println("consommé")
 				accessInventory(FirstCharacter)
-				// IL FAUT METTRE LA COMMANDE POUR LA POTION
+				TakePot(FirstCharacter) // lien vers la fonction TakePot
 			case "N", "n", "non", "no", "No", "Non":
 				fmt.Println("annulé")
 				accessInventory(FirstCharacter)
