@@ -24,6 +24,8 @@ func main() {
 			DisplayInfo(FirstCharacter)
 		case "2":
 			accessInventory(&FirstCharacter)
+		case "3":
+			Merchand(&FirstCharacter)
 		case "0":
 			fmt.Println("Au revoir", FirstCharacter.Name, "!")
 		default:
