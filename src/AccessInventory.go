@@ -2,41 +2,43 @@ package main
 
 import "fmt"
 
+var answer1 int 
+var answer2 string
+var UseItem bool = false 
+
 func accessInventory(FirstCharacter Character) {
 	fmt.Println("===============INVENTAIRE================")
 	for i := 0; i < len(FirstCharacter.Inventory); i++ {
 		fmt.Println(i, ":", FirstCharacter.Inventory[i].Name,", quantité :",FirstCharacter.Inventory[i].Quantity)
 	}
+	fmt.Println("================ACTIONS==================")
 	fmt.Println("tapez un numéro pour utiliser un objet, sinon tapez \"exit\"")
-	fmt.Scanln(&answer)
-	if FirstCharacter.Inventory[answer].Consumables == true {
-		FirstCharacter.Inventory[answer].Quantity -= 2
-	}
-
-	switch answer {
-	case "0":
-
-	case "1":
-
-	case "2":
-		
-	case "3":
-
-	case "4":
-
-	case "5":
-
-	case "6":
-
-	case "7":
-
-	case "8":
-
-	case "9":
-
-	case "10":
-
-	case "exit":
+	fmt.Scanln(&answer1)
+	switch answer1 {
+	case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10:	
+		if FirstCharacter.Inventory[answer1].Type == Consumable {
+			fmt.Println("êtes-vous certain de vouloir consommer un(e)", FirstCharacter.Inventory[answer1].Name, "? [O/N]")
+			fmt.Scanln(&answer2)
+			switch answer2 {
+			case "O", "o", "Oui", "oui":
+				FirstCharacter.Inventory[answer1].Quantity -= 1
+				fmt.Println("consommé")
+				accessInventory(FirstCharacter)
+				// IL FAUT METTRE LA COMMANDE POUR LA POTION
+			case "N", "n", "non", "no", "No", "Non":
+				fmt.Println("annulé")
+				accessInventory(FirstCharacter)
+			default:
+				fmt.Println("Erreur, Réponse non appropriée -> Retour au menu précédent")
+			}
+		} else if FirstCharacter.Inventory[answer1].Type == Equippable {
+			// il faut faire la même chose pour les objets équipalbe comme outil, arme, arumure
+		} else {
+			fmt.Println("Erreur, l'objet sélectionné ne peut pas être utilisé")
+		}
+	case "exit", "EXIT", "Exit", "E", "e":
 		return
+	default:
+		fmt.Println("Erreur, Réponse non prise en charge")
 	}
 }
