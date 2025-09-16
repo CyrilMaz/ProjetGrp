@@ -34,4 +34,5 @@ func Merchand() {
 		fmt.Println("Choix invalide, réessayez.")// 
 		fmt.Scanln(&choice) // Lire le choix de l'utilisateur
 	}
+	}
 }
