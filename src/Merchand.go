@@ -2,13 +2,13 @@ package main
 
 import "fmt"
 
+var choice int 
+
 func Merchand() {
 	fmt.Println("Bienvenue chez le marchand !")
 	fmt.Println("Que souhaitez-vous acheter ?")
-	fmt.Println("1 : Potion de soin (20 pièces d'or)")
 	fmt.Println("0 : Quitter le marchand")
-
-	var choice int 
+	fmt.Println("1 : Potion de soin (20 pièces d'or)")
 	fmt.Scanln(&choice) // Lire le choix de l'utilisateur
 
 	switch choice {
@@ -20,7 +20,7 @@ func Merchand() {
 		fmt.Println("Merci de votre visite !")//
 		main() // Retour au menu principal
 	default: // fonction default sert à gérer les cas non prévus
-		fmt.Println("Choix invalide, réessayez.")// 
-	
+		fmt.Println("Choix invalide, réessayez.")
+		fmt.Scanln(&choice)
 	}
 }
