@@ -12,8 +12,8 @@ var UseItem bool = false
 func accessInventory(FirstCharacter Character) {
 	fmt.Println("\n")
 	fmt.Println("===============INVENTAIRE================")
-	for i := 0; i < len(FirstCharacter.Inventory); i++ {
-		fmt.Println(i, ":", FirstCharacter.Inventory[i].Name,", quantité :",FirstCharacter.Inventory[i].Quantity)
+	for i := 1; i <= len(FirstCharacter.Inventory); i++ {
+		fmt.Println(i, ":", FirstCharacter.Inventory[i - 1].Name,", quantité :",FirstCharacter.Inventory[i - 1].Quantity)
 	}
 
 
@@ -22,17 +22,18 @@ func accessInventory(FirstCharacter Character) {
 	######################*/
 	fmt.Println("\n")
 	fmt.Println("================ACTIONS==================")
-	fmt.Println("tapez un numéro pour utiliser un objet, sinon tapez \"Exit\"")
+	fmt.Println("tapez un numéro pour utiliser un objet ou pour faire une action")
+	fmt.Println("0 revenir au menu précédent")
 	fmt.Scanln(&answer1)
 
 	switch answer1 {
-	case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10:
-		if FirstCharacter.Inventory[answer1].Type == "Consumable" {
-			fmt.Println("êtes-vous certain de vouloir consommer un(e)", FirstCharacter.Inventory[answer1].Name, "? [O/N]")
+	case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10:
+		if FirstCharacter.Inventory[answer1 - 1].Type == "Consumable" {
+			fmt.Println("êtes-vous certain de vouloir consommer un(e)", FirstCharacter.Inventory[answer1 - 1].Name, "? [O/N]")
 			fmt.Scanln(&answer2)
 			switch answer2 {
 			case "O", "o", "Oui", "oui":
-				FirstCharacter.Inventory[answer1].Quantity -= 1
+				FirstCharacter.Inventory[answer1 - 1].Quantity -= 1
 				fmt.Println("consommé")
 				TakePot(FirstCharacter) // lien vers la fonction TakePot
 				accessInventory(FirstCharacter)
@@ -42,12 +43,14 @@ func accessInventory(FirstCharacter Character) {
 			default:
 				fmt.Println("Retour au menu précédent")
 			}
-		} else if FirstCharacter.Inventory[answer1].Type == "Equippable" {
+		} else if FirstCharacter.Inventory[answer1 - 1].Type == "Equippable" {
 			// il faut faire la même chose pour les objets équipalbe comme outil, arme, arumure
 		} else {
 			fmt.Println("Erreur, l'objet sélectionné ne peut pas être utilisé")
 		}
-	default:
+	case 0:
 		return 
+	default:
+		return
 	}
 }
