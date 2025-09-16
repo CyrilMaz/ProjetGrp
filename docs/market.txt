@@ -1,0 +1,9 @@
+##############################
+# Fonctionnement de la vente #
+##############################
+
+# REGLES 
+- doit pouvoir supprimer un objet de l'inventaire du personnage en échange d'argent
+
+# COMMANDES
+-ouvrir l'hotel de vente -> affiche l'inventaire, l'argent,
