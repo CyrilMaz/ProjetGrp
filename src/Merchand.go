@@ -23,3 +23,4 @@ func Merchand() {
 		fmt.Println("Choix invalide, réessayez.")// 
 	
 	}
+}
