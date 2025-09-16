@@ -22,6 +22,5 @@ func initCharacter() {
 			break
 		}
 	}
-	PotionSoin := Items{"potions de soin", 3, "soin", 20, "all", true}
 	FirstCharacter = Character{nom, "Elfe", 1, 40, 100, []Items{PotionSoin}}
 }
