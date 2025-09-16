@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 func accessInventory(FirstCharacter Character) {
+<<<<<<< HEAD
 	fmt.Println("0 : sortir")	
 	for i := 1; i < len(FirstCharacter.Inventory) - 1; i++ {
 		fmt.Println(i, ":", FirstCharacter.Inventory[i].Name, FirstCharacter.Inventory[i].Quantity)
@@ -30,5 +31,9 @@ func accessInventory(FirstCharacter Character) {
 	case "9":
 
 	case "10":
+=======
+	for i := 0; i < len(FirstCharacter.Inventory); i++ {
+		fmt.Println(FirstCharacter.Inventory[i].Name, FirstCharacter.Inventory[i].Quantity)
+>>>>>>> 46971e2 (fix add boucle)
 	}
 }
