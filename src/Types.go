@@ -15,4 +15,5 @@ type Items struct {
 	StatName        string
 	StatBoost       int
 	RespectiveClass string
+	Consumables     bool
 }
