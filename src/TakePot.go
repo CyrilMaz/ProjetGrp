@@ -8,5 +8,5 @@ func TakePot(c Character) {
 	} else {
 		c.Pv += 50
 	}
-	fmt.Println(c.Pv, "/", c.Pvmax)
+	fmt.Println(c.Pv, "HP /", c.Pvmax, "HP")
 }
