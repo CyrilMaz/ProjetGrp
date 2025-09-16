@@ -23,7 +23,7 @@ func main() {
 		case "1":
 			DisplayInfo(FirstCharacter)
 		case "2":
-			accessInventory(FirstCharacter)
+			accessInventory(&FirstCharacter)
 		case "0":
 			fmt.Println("Au revoir", FirstCharacter.Name, "!")
 		default:

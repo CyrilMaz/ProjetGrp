@@ -9,7 +9,7 @@ var UseItem bool = false
 /*#############################
 # AFFICHAGE DE L'INVENTAIRE #
 #############################*/
-func accessInventory(FirstCharacter Character) {
+func accessInventory(FirstCharacter *Character) {
 	fmt.Println("\n")
 	fmt.Println("◇─◇──◇────◇ INVENTAIRE ◇─────◇──◇─◇")
 	for i := 1; i <= len(FirstCharacter.Inventory); i++ {

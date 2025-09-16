@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func TakePot(c Character) {
+func TakePot(c *Character) {
 	if c.Pv+50 > c.Pvmax {
 		c.Pv = c.Pvmax
 	} else {
