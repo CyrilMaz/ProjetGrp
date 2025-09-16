@@ -10,6 +10,7 @@ var UseItem bool = false
 # AFFICHAGE DE L'INVENTAIRE #
 #############################*/
 func accessInventory(FirstCharacter Character) {
+	fmt.Println("\n")
 	fmt.Println("===============INVENTAIRE================")
 	for i := 0; i < len(FirstCharacter.Inventory); i++ {
 		fmt.Println(i, ":", FirstCharacter.Inventory[i].Name,", quantité :",FirstCharacter.Inventory[i].Quantity)
@@ -19,10 +20,11 @@ func accessInventory(FirstCharacter Character) {
 	/*######################
 	# GESTION DES OBJETS #
 	######################*/
+	fmt.Println("\n")
 	fmt.Println("================ACTIONS==================")
 	fmt.Println("tapez un numéro pour utiliser un objet, sinon tapez \"Exit\"")
 	fmt.Scanln(&answer1)
-	
+
 	switch answer1 {
 	case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10:
 		if FirstCharacter.Inventory[answer1].Type == "Consumable" {
@@ -46,6 +48,6 @@ func accessInventory(FirstCharacter Character) {
 			fmt.Println("Erreur, l'objet sélectionné ne peut pas être utilisé")
 		}
 	default:
-		return
+		return 
 	}
 }
