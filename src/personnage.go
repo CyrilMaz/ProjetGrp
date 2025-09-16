@@ -23,6 +23,9 @@ type Items struct {
 
 // Variable globale accessible partout
 var FirstCharacter Character
+var MENU01 = []string{"0 : sortir", "1 : infos du personnage", "2 : accéder à l'inventaire"}
+
+
 
 func initCharacter() {
 	var nom string
@@ -44,7 +47,6 @@ func initCharacter() {
 	}
 	PotionSoin := Items{"potions de soin", 3, "soin", 20, "all"}
 	FirstCharacter = Character{nom, "Elfe", 1, 40, 100, []Items{PotionSoin}}
-	fmt.Println("tu as désormais", FirstCharacter.Inventory[0].Quantity, FirstCharacter.Inventory[0].Name)
 }
 
 func DisplayInfo(p Character) {
@@ -61,12 +63,24 @@ func DisplayInfo(p Character) {
 func accessInventory(FirstCharacter Character) {
 	for i := 0; i < len(FirstCharacter.Inventory); i++ {
 		fmt.Println(FirstCharacter.Inventory[i].Name, FirstCharacter.Inventory[i].Quantity)
-
 	}
 }
 
+
 func main() {
+	var answer string 
 	initCharacter()
-	DisplayInfo(FirstCharacter)
-	accessInventory(FirstCharacter)
+	fmt.Println("Que voulez vous faire ?")
+	for i := 0; i < len(MENU01); i++ {
+		fmt.Println(MENU01[i])
+	}
+	fmt.Scanln(&answer)
+	switch answer {
+	case "0":
+		return
+	case "1":
+		DisplayInfo(FirstCharacter)
+	case "2":
+		accessInventory(FirstCharacter)
+	}
 }
