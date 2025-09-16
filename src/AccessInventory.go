@@ -11,7 +11,7 @@ var UseItem bool = false
 #############################*/
 func accessInventory(FirstCharacter Character) {
 	fmt.Println("\n")
-	fmt.Println("===============INVENTAIRE================")
+	fmt.Println("◇─◇──◇────◇ INVENTAIRE ◇─────◇──◇─◇")
 	for i := 1; i <= len(FirstCharacter.Inventory); i++ {
 		fmt.Println(i, ":", FirstCharacter.Inventory[i - 1].Name,", quantité :",FirstCharacter.Inventory[i - 1].Quantity)
 	}
@@ -21,9 +21,9 @@ func accessInventory(FirstCharacter Character) {
 	# GESTION DES OBJETS #
 	######################*/
 	fmt.Println("\n")
-	fmt.Println("================ACTIONS==================")
-	fmt.Println("tapez un numéro pour utiliser un objet ou pour faire une action")
+	fmt.Println("◇─◇──◇────◇ ACTIONS ◇─────◇──◇─◇")
 	fmt.Println("0 revenir au menu précédent")
+	fmt.Println("tapez un numéro pour utiliser un objet ou pour faire une action")
 	fmt.Scanln(&answer1)
 
 	switch answer1 {
