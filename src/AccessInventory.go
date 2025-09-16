@@ -24,7 +24,7 @@ func accessInventory(FirstCharacter Character) {
 	fmt.Scanln(&answer1)
 	switch answer1 {
 	case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10:	
-		if FirstCharacter.Inventory[answer1].Type == Consumable {
+		if FirstCharacter.Inventory[answer1].Type == "Consumable" {
 			fmt.Println("êtes-vous certain de vouloir consommer un(e)", FirstCharacter.Inventory[answer1].Name, "? [O/N]")
 			fmt.Scanln(&answer2)
 			switch answer2 {
@@ -39,12 +39,12 @@ func accessInventory(FirstCharacter Character) {
 			default:
 				fmt.Println("Erreur, Réponse non appropriée -> Retour au menu précédent")
 			}
-		} else if FirstCharacter.Inventory[answer1].Type == Equippable {
+		} else if FirstCharacter.Inventory[answer1].Type == "Equippable" {
 			// il faut faire la même chose pour les objets équipalbe comme outil, arme, arumure
 		} else {
 			fmt.Println("Erreur, l'objet sélectionné ne peut pas être utilisé")
 		}
-	case "exit", "EXIT", "Exit", "E", "e":
+	case "exit":
 		return
 	default:
 		fmt.Println("Erreur, Réponse non prise en charge")
