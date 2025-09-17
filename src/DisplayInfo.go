@@ -27,7 +27,7 @@ func DisplayInfo(FirstCharacter *Character) {
 	}
 	fmt.Print("\n")
 	fmt.Println("\n★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
-	fmt.Println("|★ Appuyez sur une touche pour sortir du menu |")
+	fmt.Println("|★ Appuyez sur une Entrée pour sortir du menu |")
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
 	fmt.Scanln(&answer)
 	switch answer {
