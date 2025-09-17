@@ -32,7 +32,8 @@ func Merchand(FirstCharacter *Character) {
 		fmt.Println("Merci de votre visite !")
 		main() // Retour au menu principal
 	default: // fonction default sert à gérer les cas non prévus
-		fmt.Println("Choix invalide, réessayez.") //
+		fmt.Println("Choix invalide, réessayez.") // Message d'erreur pour un choix invalide
 		fmt.Scanln(&choice)                       // Lire le choix de l'utilisateur
 	}
+
 }
