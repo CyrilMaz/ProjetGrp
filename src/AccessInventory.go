@@ -15,7 +15,9 @@ func accessInventory(FirstCharacter *Character) {
 	fmt.Println("")
 	fmt.Println("◇─◇──◇────◇ INVENTAIRE ◇─────◇──◇─◇")
 	for i := 1; i <= len(FirstCharacter.Inventory); i++ {
-		fmt.Println(i, ":", FirstCharacter.Inventory[i-1].Name, ", quantité :", FirstCharacter.Inventory[i-1].Quantity)
+		if FirstCharacter.Inventory[i-1].Quantity > 0 {
+			fmt.Println(i, ":", FirstCharacter.Inventory[i-1].Name, ", quantité :", FirstCharacter.Inventory[i-1].Quantity)
+		}
 	}
 
 	/*######################
@@ -42,6 +44,7 @@ func accessInventory(FirstCharacter *Character) {
 				} else {
 					fmt.Println("Pas assez de", FirstCharacter.Inventory[answer1-1].Name)
 					accessInventory(FirstCharacter)
+
 				}
 			case "N", "n", "non", "no", "No", "Non":
 				fmt.Println("annulé")
