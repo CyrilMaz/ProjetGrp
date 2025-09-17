@@ -11,6 +11,10 @@ func DisplayInfo(p *Character) {
 	fmt.Println("Points de vie actuels :", p.Pv)
 	fmt.Println("Points de vie max :", p.Pvmax)
 	fmt.Println("Pieces d'or :", p.Gold)
+	fmt.Println("Compétences apprises :")
+	for i := 0; i < len(p.Skills); i++ {
+		fmt.Printf(p.Skills[i].Name)
+	}
 	fmt.Println("")
 	fmt.Println("◇─◇──◇────◇ INVENTAIRE ◇─────◇──◇─◇")
 	for i := 0; i < len(p.Inventory); i++ {

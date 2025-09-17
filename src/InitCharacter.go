@@ -22,5 +22,5 @@ func initCharacter() {
 			break
 		}
 	}
-	FirstCharacter = Character{nom, "Elfe", 1, 40, 100, []Items{PotionSoin}, 100, []string{"Coup de poing"}}
+	FirstCharacter = Character{nom, "Elfe", 1, 40, 100, []Items{PotionSoin}, 100, []Skills{{"Coup de poing", true}}}
 }

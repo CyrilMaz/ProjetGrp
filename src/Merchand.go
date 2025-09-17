@@ -12,6 +12,7 @@ func Merchand(FirstCharacter *Character) {
 	} else {
 		fmt.Println("1 : Potion de soin (20 pièces d'or)")
 	}
+	fmt.Println("2 : Livre de sorts (100 pièces d'or)")
 	fmt.Println("0 : Quitter le marchand")
 
 	var choice int
@@ -32,6 +33,13 @@ func Merchand(FirstCharacter *Character) {
 				fmt.Println("Vous n'avez pas assez d'argent pour acheter une potion de soin.")
 			}
 		}
+	case 2:
+		if FirstCharacter.Gold >= 100 {
+			SpeellBook(FirstCharacter, Fireball) // Appelle la fonction SpeellBook pour apprendre le sort Fireball
+			FirstCharacter.Gold -= 100
+
+		}
+
 	case 0:
 		fmt.Println("Merci de votre visite !")
 		main() // Retour au menu principal
@@ -39,5 +47,4 @@ func Merchand(FirstCharacter *Character) {
 		fmt.Println("Choix invalide, réessayez.") // Message d'erreur pour un choix invalide
 		fmt.Scanln(&choice)                       // Lire le choix de l'utilisateur
 	}
-
 }
