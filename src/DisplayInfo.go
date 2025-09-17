@@ -17,7 +17,7 @@ func DisplayInfo(FirstCharacter *Character) {
 	fmt.Println("Compétences apprises :")
 	for i := 0; i < len(FirstCharacter.Skills); i++ {
 		if FirstCharacter.Skills[i].Learned {
-			fmt.Print(FirstCharacter.Skills[i].Name)
+			fmt.Print("☆", FirstCharacter.Skills[i].Name)
 		}
 		if i == len(FirstCharacter.Skills)-1 {
 			fmt.Print(".")

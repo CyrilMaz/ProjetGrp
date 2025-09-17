@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 var initalized bool = false
 var answer string
@@ -54,6 +57,7 @@ func main() {
 		IsDead(&FirstCharacter)
 	case "0":
 		fmt.Println("Au revoir", FirstCharacter.Name, "!")
+		os.Exit(0)
 	default:
 		main()
 	}

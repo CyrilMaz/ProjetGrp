@@ -4,6 +4,7 @@ import "fmt"
 
 var PotionGratuite = true // Variable globale pour suivre si la potion gratuite a été prise
 var DisplayAddItem = true
+var ShowlastPurchase = false
 var lastPurchase = ""
 
 func Merchand(p *Character) {
@@ -46,12 +47,16 @@ func Merchand(p *Character) {
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
 	fmt.Println("|    0 : Sortir de la boutique   |")
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
-	fmt.Println(lastPurchase)
+	if ShowlastPurchase {
+		fmt.Println("Dernier achat :", lastPurchase)
+		ShowlastPurchase = false
+	}
 	var choice int
 	fmt.Scanln(&choice) // Lire le choix de l'utilisateur
 
 	switch choice {
 	case 1:
+		ShowlastPurchase = true
 		if PotionGratuite {
 			DisplayAddItem = false
 			AddInventory(p, PotionSoin) // Ajoute la potion de soin à l'inventaire via la fonction AddInventory
@@ -71,6 +76,7 @@ func Merchand(p *Character) {
 			}
 		}
 	case 2:
+		ShowlastPurchase = true
 		if FirstCharacter.Gold >= 6 {
 			DisplayAddItem = false
 			AddInventory(p, PotionPoison)
@@ -82,6 +88,7 @@ func Merchand(p *Character) {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter une potion de poison.")
 		}
 	case 3:
+		ShowlastPurchase = true
 		if FirstCharacter.Gold >= 25 {
 			DisplayAddItem = false
 			AddInventory((p), LivreSorts)
@@ -93,6 +100,7 @@ func Merchand(p *Character) {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter un livre de sorts.")
 		}
 	case 4:
+		ShowlastPurchase = true
 		if FirstCharacter.Gold >= 4 {
 			DisplayAddItem = false
 			AddInventory(p, FourrureLoup)
@@ -104,6 +112,7 @@ func Merchand(p *Character) {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter une fourrure de loup.")
 		}
 	case 5:
+		ShowlastPurchase = true
 		if FirstCharacter.Gold >= 7 {
 			DisplayAddItem = false
 			AddInventory(p, PeauTroll)
@@ -115,6 +124,7 @@ func Merchand(p *Character) {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter une peau de troll.")
 		}
 	case 6:
+		ShowlastPurchase = true
 		if FirstCharacter.Gold >= 3 {
 			DisplayAddItem = false
 			AddInventory(p, CuirSanglier)
@@ -126,6 +136,7 @@ func Merchand(p *Character) {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter un cuir de sanglier.")
 		}
 	case 7:
+		ShowlastPurchase = true
 		if FirstCharacter.Gold >= 1 {
 			DisplayAddItem = false
 			AddInventory(p, PlumeCorbeau)
