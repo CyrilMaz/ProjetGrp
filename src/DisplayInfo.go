@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func DisplayInfo(p Character) {
+func DisplayInfo(p *Character) {
 	fmt.Println("")
 	fmt.Println("◇─◇──◇────◇ INFORMATION ◇─────◇──◇─◇")
 	fmt.Println("Nom :", p.Name)

@@ -21,7 +21,7 @@ func main() {
 
 		switch answer {
 		case "1":
-			DisplayInfo(FirstCharacter)
+			DisplayInfo(&FirstCharacter)
 		case "2":
 			accessInventory(&FirstCharacter)
 		case "3":
