@@ -24,8 +24,8 @@ func Merchand(FirstCharacter *Character) {
 	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⢂⠀⠀⠀⠀⠀⢠⠁⠀⠀⠀⠀⠀⢸⠄⠰⡶⠲⢦⠓⠍⠀⠀")
 	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⠀⠡⡀⠀⠀⠀⠀⠀⠀⡄⠀⢀⠄⠊⠉⠙⠑⠒⠊⠉⠀⠀")
 
-	fmt.Println("┈ ┈ ┈ ┈ ┈ ⋞ 〈 ⏣ 〉 ⋟ ┈ ┈ ┈ ┈ ┈")
-	fmt.Println("Bienvenue chez le marchand !")
+	fmt.Println(" ┈ ┈ ┈ ┈ ┈ ⋞ 〈  ⏣ 	〉 ⋟ ┈ ┈ ┈ ┈ ┈")
+	fmt.Println("   Bienvenue chez le marchand !")
 
 	fmt.Println("¸„.-•~¹°”ˆ˜¨ BOUTIQUE ¨˜ˆ”°¹~•-.„¸")
 	if PotionGratuite {
