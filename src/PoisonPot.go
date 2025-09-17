@@ -12,7 +12,7 @@ func PoisonPot(p *Character) {
 	p.Pv -= 10
 	if p.Pv <= 0 {
 		fmt.Println("Vous êtes mort !")
-		IsDead(p) // Appelle la fonction IsDead pour gérer la mort du personnage
+		//IsDead(p) // Appelle la fonction IsDead pour gérer la mort du personnage
 	} else {
 		fmt.Println("Il vous reste", p.Pv, "/", p.Pvmax, "points de vie.")
 	}
