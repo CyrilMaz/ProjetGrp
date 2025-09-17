@@ -12,25 +12,38 @@ var UseItem bool = false
 #############################
 */
 func accessInventory(FirstCharacter *Character) {
-	fmt.Println("")
-	DisplayInfo(FirstCharacter)
+	for spaces := 0; spaces < 40; spaces++ {
+		fmt.Print("\n")
+	}
+	fmt.Println("┏◇─◇──◇────◇ INVENTAIRE ◇─────◇──◇─◇┓")
+	fmt.Println("╠===================================╣")
+	for i := 1; i <= len(FirstCharacter.Inventory); i++ {
+		if FirstCharacter.Inventory[i-1].Quantity > 0 {
+			fmt.Println(" ", i, ":", FirstCharacter.Inventory[i-1].Name, "| quantité:", FirstCharacter.Inventory[i-1].Quantity)
+		}
+	}
+	fmt.Println("┗===================================┛")
 
 	/*######################
 	# GESTION DES OBJETS #
 	######################*/
 	fmt.Println("")
-	fmt.Println("◇─◇──◇────◇ ACTIONS ◇─────◇──◇─◇")
-	fmt.Println("0 revenir au menu précédent")
-	fmt.Println("tapez un numéro pour utiliser un objet ou pour faire une action")
+	fmt.Println("\n")
+	fmt.Println("★¸„.-•~¹°”ˆ˜¨ ACTIONS ¨˜ˆ”°¹~•-.„¸★")
+	fmt.Println("|                                 |")
+	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+	fmt.Println("|   0 revenir au menu principal   |")
+	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+	fmt.Println("\n★ tapez le numéro d'un objet pour l'utiliser")
 	fmt.Scanln(&answer1)
 
 	switch answer1 {
 	case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10:
 		if FirstCharacter.Inventory[answer1-1].Type == "Consumable" {
-			fmt.Println("êtes-vous certain de vouloir consommer un(e)", FirstCharacter.Inventory[answer1-1].Name, "? [O/N]")
+			fmt.Println("★ êtes-vous certain de vouloir consommer un(e)", FirstCharacter.Inventory[answer1-1].Name, "? [O/N]")
 			fmt.Scanln(&answer2)
 			switch answer2 {
-			case "O", "o", "Oui", "oui", "OUI", "OUi", "oUI", "oUi":
+			case "o", "O", "ou", "oU", "Ou", "OU", "oui", "ouI", "oUi", "oUI", "Oui", "OuI", "OUi", "OUI":
 				if FirstCharacter.Inventory[answer1-1].Name == "potions de soin" {
 					if FirstCharacter.Inventory[answer1-1].Quantity > 0 {
 						FirstCharacter.Inventory[answer1-1].Quantity -= 1
@@ -45,7 +58,6 @@ func accessInventory(FirstCharacter *Character) {
 					if FirstCharacter.Inventory[answer1-1].Quantity > 0 {
 						FirstCharacter.Inventory[answer1-1].Quantity -= 1
 						fmt.Println("consommé")
-						accessInventory(FirstCharacter)
 						SpeellBook(FirstCharacter, Fireball) // lien vers la fonction SpellBook
 					} else {
 						fmt.Println("Pas assez de", FirstCharacter.Inventory[answer1-1].Name)
@@ -57,7 +69,7 @@ func accessInventory(FirstCharacter *Character) {
 						FirstCharacter.Inventory[answer1-1].Quantity -= 1
 						fmt.Println("consommé")
 						PoisonPot(FirstCharacter)
-						fmt.Println("\nAppuyez sur entrée pour continuer...")
+						fmt.Println("\n★ Appuyez sur entrée pour continuer...")
 						fmt.Scanln()
 						accessInventory(FirstCharacter)
 					} else {
@@ -68,7 +80,7 @@ func accessInventory(FirstCharacter *Character) {
 				} else {
 					fmt.Println("Erreur, l'objet sélectionné ne peut pas être utilisé")
 				}
-			case "N", "n", "non", "no", "No", "Non":
+			case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
 				fmt.Println("annulé")
 				accessInventory(FirstCharacter)
 			default:
@@ -80,8 +92,8 @@ func accessInventory(FirstCharacter *Character) {
 			fmt.Println("Erreur, l'objet sélectionné ne peut pas être utilisé")
 		}
 	case 0:
-		return
+		main()
 	default:
-		return
+		main()
 	}
 }

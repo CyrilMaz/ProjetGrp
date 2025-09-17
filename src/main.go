@@ -12,6 +12,9 @@ func main() {
 	if !initalized {
 		initCharacter()
 		initalized = true
+		for spaces := 0; spaces < 40; spaces++ {
+			fmt.Print("\n")
+		}
 		fmt.Println("╔══════════════════════════════════════════════╗")
 		fmt.Println("║                                              ║")
 		fmt.Println("║      BIENVENUE DANS LE MONDE D'AVENTURE      ║")
@@ -22,32 +25,36 @@ func main() {
 		fmt.Println("║                                              ║")
 		fmt.Println("╚══════════════════════════════════════════════╝")
 	}
-	for answer != "0" {
-		fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━★")
-		fmt.Println("| Que voulez-vous faire ? |")
-		fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━★")
-		for i := 0; i < len(MENU01); i++ {
-			fmt.Println(MENU01[i])
-		}
-		fmt.Print("\n")
-		fmt.Println(MENU00)
-		fmt.Print("\n")
-		fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━★")
-		fmt.Println("| Quel est ton choix ? |")
-		fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━★")
-		fmt.Scanln(&answer)
+	fmt.Println("\n")
+	fmt.Println("★¸„.-•~¹°”ˆ˜¨ ACTIONS ¨˜ˆ”°¹~•-.„¸★")
+	fmt.Println("|                                 |")
+	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+	for i := 0; i < len(MENU01); i++ {
+		fmt.Println(MENU01[i])
+	}
+	fmt.Println("|                                 |")
+	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+	fmt.Println("|        0 : Sortir du jeu        |")
+	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+	fmt.Print("\n")
 
-		switch answer {
-		case "1":
-			DisplayInfo(&FirstCharacter)
-		case "2":
-			accessInventory(&FirstCharacter)
-		case "3":
-			Merchand(&FirstCharacter)
-		case "0":
-			fmt.Println("Au revoir", FirstCharacter.Name, "!")
-		default:
-			fmt.Println("Choix invalide, réessayez.")
-		}
+	fmt.Println("★ Quel est ton choix ? ")
+
+	fmt.Scanln(&answer)
+
+	switch answer {
+	case "1":
+		DisplayInfo(&FirstCharacter)
+	case "2":
+		accessInventory(&FirstCharacter)
+	case "3":
+		Merchand(&FirstCharacter)
+	case "/kill":
+		FirstCharacter.Pv = 0
+		IsDead(&FirstCharacter)
+	case "0":
+		fmt.Println("Au revoir", FirstCharacter.Name, "!")
+	default:
+		fmt.Println("Choix invalide, réessayez.")
 	}
 }

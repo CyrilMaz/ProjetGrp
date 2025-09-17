@@ -3,8 +3,10 @@ package main
 import "fmt"
 
 var PotionGratuite = true // Variable globale pour suivre si la potion gratuite a été prise
+var DisplayAddItem = true
+var lastPurchase = ""
 
-func Merchand(FirstCharacter *Character) {
+func Merchand(p *Character) {
 	for spaces := 0; spaces < 40; spaces++ {
 		fmt.Print("\n")
 	}
@@ -24,85 +26,113 @@ func Merchand(FirstCharacter *Character) {
 	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⢂⠀⠀⠀⠀⠀⢠⠁⠀⠀⠀⠀⠀⢸⠄⠰⡶⠲⢦⠓⠍⠀⠀")
 	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⠀⠡⡀⠀⠀⠀⠀⠀⠀⡄⠀⢀⠄⠊⠉⠙⠑⠒⠊⠉⠀⠀")
 
-	fmt.Println(" ┈ ┈ ┈ ┈ ┈ ⋞ 〈  ⏣ 	〉 ⋟ ┈ ┈ ┈ ┈ ┈")
-	fmt.Println("   Bienvenue chez le marchand !")
+	fmt.Println(" ┈ ┈ ┈ ┈ ┈ ⋞ <  ⏣  > ⋟ ┈ ┈ ┈ ┈ ┈")
+	fmt.Println("\n   Bienvenue chez le marchand !")
 
-	fmt.Println("¸„.-•~¹°”ˆ˜¨ BOUTIQUE ¨˜ˆ”°¹~•-.„¸")
+	fmt.Println("\n¸„.-•~¹°”ˆ˜¨ BOUTIQUE ¨˜ˆ”°¹~•-.„¸")
 
 	if PotionGratuite {
-		fmt.Println("1 : Potion de soin (Gratuite)")
+		fmt.Println("| 1 : Potion de soin ···(Gratuite)")
 	} else {
-		fmt.Println("1 : Potion de soin (3 pièces d'or)")
+		fmt.Println("| 1 : Potion de soin ·······(3 PO)")
 	}
-	fmt.Println("2 : potion de poison (6 pièces d'or)")
-	fmt.Println("3 : Livre de sorts (25 pièces d'or)")
-	fmt.Println("4 : Fourrure de loup (4 pièces d'or)")
-	fmt.Println("5 : Peau de troll (7 pièces d'or)")
-	fmt.Println("6 : Cuir de sanglier (3 pièces d'or)")
-	fmt.Println("7 : plume de corbeau (1 pièces d'or)")
-	fmt.Println("\n0 : sortir de la boutique")
-
+	fmt.Println("| 2 : Potion de poison ·····(6 PO)")
+	fmt.Println("| 3 : Livre de sorts ······(25 PO)")
+	fmt.Println("| 4 : Fourrure de loup ·····(4 PO)")
+	fmt.Println("| 5 : Peau de troll ········(7 PO)")
+	fmt.Println("| 6 : Cuir de sanglier ·····(3 PO)")
+	fmt.Println("| 7 : Plume de corbeau ·····(1 PO)")
+	fmt.Println("|                                |")
+	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+	fmt.Println("|    0 : Sortir de la boutique   |")
+	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+	fmt.Println(lastPurchase)
 	var choice int
 	fmt.Scanln(&choice) // Lire le choix de l'utilisateur
 
 	switch choice {
 	case 1:
 		if PotionGratuite {
-			fmt.Println("Vous avez reçu une potion de soin gratuite !")
-			AddInventory(FirstCharacter, PotionSoin) // Ajoute la potion de soin à l'inventaire via la fonction AddInventory
-			PotionGratuite = false                   // Met à jour la variable pour indiquer que la potion gratuite a été prise
+			DisplayAddItem = false
+			AddInventory(p, PotionSoin) // Ajoute la potion de soin à l'inventaire via la fonction AddInventory
+			lastPurchase = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", PotionSoin.Quantity, PotionSoin.Name)
+			PotionGratuite = false // Met à jour la variable pour indiquer que la potion gratuite a été prise
+			Merchand(p)
 		} else {
 			if FirstCharacter.Gold >= 3 {
-				AddInventory(FirstCharacter, PotionSoin) // Ajoute la potion de soin à l'inventaire via la fonction AddInventory
-				FirstCharacter.Gold -= 3                 // Déduit le coût de la potion de l'argent du personnage
-				fmt.Println("Vous avez acheté une potion de soin.")
+				DisplayAddItem = false
+				AddInventory(p, PotionSoin) // Ajoute la potion de soin à l'inventaire via la fonction AddInventory
+				FirstCharacter.Gold -= 3    // Déduit le coût de la potion de l'argent du personnage
+				lastPurchase = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", PotionSoin.Quantity, PotionSoin.Name)
+				Merchand(p)
+				fmt.Println("Vous avez ajouté", PotionSoin.Quantity, PotionSoin.Name, "à votre inventaire.")
 			} else {
 				fmt.Println("Vous n'avez pas assez d'argent pour acheter une potion de soin.")
 			}
 		}
 	case 2:
 		if FirstCharacter.Gold >= 6 {
-			AddInventory(FirstCharacter, PotionPoison)
+			DisplayAddItem = false
+			AddInventory(p, PotionPoison)
 			FirstCharacter.Gold -= 6
-			fmt.Println("Vous avez acheté une potion de poison.")
+			lastPurchase = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", PotionPoison.Quantity, PotionPoison.Name)
+			Merchand(p)
+			fmt.Println("Vous avez ajouté", PotionPoison.Quantity, PotionPoison.Name, "à votre inventaire.")
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter une potion de poison.")
 		}
 	case 3:
 		if FirstCharacter.Gold >= 25 {
-			AddInventory((FirstCharacter), LivreSorts)
+			DisplayAddItem = false
+			AddInventory((p), LivreSorts)
 			FirstCharacter.Gold -= 25
-			fmt.Println("Vous avez acheté un livre de sorts.")
+			lastPurchase = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", LivreSorts.Quantity, LivreSorts.Name)
+			Merchand(p)
+			fmt.Println("Vous avez ajouté", LivreSorts.Quantity, LivreSorts.Name, "à votre inventaire.")
+		} else {
+			fmt.Println("Vous n'avez pas assez d'argent pour acheter un livre de sorts.")
 		}
 	case 4:
 		if FirstCharacter.Gold >= 4 {
-			AddInventory(FirstCharacter, FourrureLoup)
+			DisplayAddItem = false
+			AddInventory(p, FourrureLoup)
 			FirstCharacter.Gold -= 4
-			fmt.Println("Vous avez acheté une fourrure de loup.")
+			lastPurchase = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", FourrureLoup.Quantity, FourrureLoup.Name)
+			Merchand(p)
+			fmt.Println("Vous avez ajouté", FourrureLoup.Quantity, FourrureLoup.Name, "à votre inventaire.")
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter une fourrure de loup.")
 		}
 	case 5:
 		if FirstCharacter.Gold >= 7 {
-			AddInventory(FirstCharacter, PeauTroll)
+			DisplayAddItem = false
+			AddInventory(p, PeauTroll)
 			FirstCharacter.Gold -= 7
-			fmt.Println("Vous avez acheté une peau de troll.")
+			lastPurchase = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", PeauTroll.Quantity, PeauTroll.Name)
+			Merchand(p)
+			fmt.Println("Vous avez ajouté", PeauTroll.Quantity, PeauTroll.Name, "à votre inventaire.")
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter une peau de troll.")
 		}
 	case 6:
 		if FirstCharacter.Gold >= 3 {
-			AddInventory(FirstCharacter, CuirSanglier)
+			DisplayAddItem = false
+			AddInventory(p, CuirSanglier)
 			FirstCharacter.Gold -= 3
-			fmt.Println("Vous avez acheté un cuir de sanglier.")
+			lastPurchase = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", CuirSanglier.Quantity, CuirSanglier.Name)
+			Merchand(p)
+			fmt.Println("Vous avez ajouté", CuirSanglier.Quantity, CuirSanglier.Name, "à votre inventaire.")
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter un cuir de sanglier.")
 		}
 	case 7:
 		if FirstCharacter.Gold >= 1 {
-			AddInventory(FirstCharacter, PlumeCorbeau)
+			DisplayAddItem = false
+			AddInventory(p, PlumeCorbeau)
 			FirstCharacter.Gold -= 1
-			fmt.Println("Vous avez acheté une plume de corbeau.")
+			lastPurchase = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", PlumeCorbeau.Quantity, PlumeCorbeau.Name)
+			Merchand(p)
+			fmt.Println("Vous avez ajouté", PlumeCorbeau.Quantity, PlumeCorbeau.Name, "à votre inventaire.")
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter une plume de corbeau.")
 		}

@@ -17,15 +17,21 @@ func DisplayInfo(FirstCharacter *Character) {
 	fmt.Println("Compétences apprises :")
 	for i := 0; i < len(FirstCharacter.Skills); i++ {
 		if FirstCharacter.Skills[i].Learned {
-			fmt.Println(FirstCharacter.Skills[i].Name)
+			fmt.Print(FirstCharacter.Skills[i].Name)
+		}
+		if i == len(FirstCharacter.Skills)-1 {
+			fmt.Print(".")
+		} else {
+			fmt.Print(", ")
 		}
 	}
-	fmt.Println("")
-	fmt.Println("┏◇─◇──◇────◇ INVENTAIRE ◇─────◇──◇─◇┓")
-	fmt.Println("=====================================")
-	for i := 1; i <= len(FirstCharacter.Inventory); i++ {
-		if FirstCharacter.Inventory[i-1].Quantity > 0 {
-			fmt.Println(i, ":", FirstCharacter.Inventory[i-1].Name, ", quantité :", FirstCharacter.Inventory[i-1].Quantity)
-		}
+	fmt.Print("\n")
+	fmt.Println("\n★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+	fmt.Println("|★ Appuyez sur une touche pour sortir du menu |")
+	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+	fmt.Scanln(&answer)
+	switch answer {
+	default:
+		main()
 	}
 }

@@ -10,7 +10,7 @@ var FirstCharacter Character
 func initCharacter() {
 	var nom string
 	for {
-		fmt.Println("Quel est le nom de ton personnage")
+		fmt.Println("★ Quel est le nom de ton personnage")
 		fmt.Scanln(&nom) // scan le nom du personnage
 		match := true
 		for i := 0; i < len(nom); i++ {
@@ -36,7 +36,7 @@ func initCharacter() {
 	for spaces := 0; spaces < 40; spaces++ {
 		fmt.Print("\n")
 	}
-	fmt.Println("Quelle est ta classe ?")
+	fmt.Println("★ Quelle est ta classe ?")
 	fmt.Println("1 : Humain")
 	fmt.Println("2 : Elfe")
 	fmt.Println("3 : Nain")
