@@ -31,9 +31,9 @@ func Merchand(FirstCharacter *Character) {
 	if PotionGratuite {
 		fmt.Println("1 : Potion de soin (Gratuite)")
 	} else {
-		fmt.Println("1 : Potion de soin (20 pièces d'or)")
+		fmt.Println("1 : Potion de soin (3 pièces d'or)")
 	}
-	fmt.Println("2 : Livre de sorts (100 pièces d'or)")
+	fmt.Println("2 : Livre de sorts (25 pièces d'or)")
 	fmt.Println("0 : Quitter le marchand")
 
 	var choice int
@@ -46,18 +46,18 @@ func Merchand(FirstCharacter *Character) {
 			AddInventory(FirstCharacter, PotionSoin) // Ajoute la potion de soin à l'inventaire via la fonction AddInventory
 			PotionGratuite = false                   // Met à jour la variable pour indiquer que la potion gratuite a été prise
 		} else {
-			if FirstCharacter.Gold >= 20 {
+			if FirstCharacter.Gold >= 3 {
 				AddInventory(FirstCharacter, PotionSoin) // Ajoute la potion de soin à l'inventaire via la fonction AddInventory
-				FirstCharacter.Gold -= 20                // Déduit le coût de la potion de l'argent du personnage
+				FirstCharacter.Gold -= 3                 // Déduit le coût de la potion de l'argent du personnage
 				fmt.Println("Vous avez acheté une potion de soin.")
 			} else {
 				fmt.Println("Vous n'avez pas assez d'argent pour acheter une potion de soin.")
 			}
 		}
 	case 2:
-		if FirstCharacter.Gold >= 100 {
+		if FirstCharacter.Gold >= 25 {
 			AddInventory((FirstCharacter), LivreSorts) // Ajoute le livre de sorts à l'inventaire via la fonction AddInventory
-			FirstCharacter.Gold -= 100
+			FirstCharacter.Gold -= 25
 		}
 
 	case 0:
