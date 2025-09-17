@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 var initalized bool = false
-var answer string 
+var answer string
 
 func main() {
 	if initalized == false {
