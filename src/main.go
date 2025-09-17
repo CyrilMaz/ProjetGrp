@@ -52,6 +52,8 @@ func main() {
 		accessInventory(&FirstCharacter)
 	case "3":
 		Merchand(&FirstCharacter)
+	case "4":
+		BlackSmith(&FirstCharacter)
 	case "/kill":
 		FirstCharacter.Pv = 0
 		IsDead(&FirstCharacter)
