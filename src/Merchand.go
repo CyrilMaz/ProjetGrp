@@ -5,6 +5,7 @@ import "fmt"
 var PotionGratuite = true // Variable globale pour suivre si la potion gratuite a été prise
 
 func Merchand(FirstCharacter *Character) {
+	fmt.Println("")
 	fmt.Println("Bienvenue chez le marchand !")
 	fmt.Println("Que souhaitez-vous acheter ?")
 	if PotionGratuite {
@@ -35,9 +36,8 @@ func Merchand(FirstCharacter *Character) {
 		}
 	case 2:
 		if FirstCharacter.Gold >= 100 {
-			SpeellBook(FirstCharacter, Fireball) // Appelle la fonction SpeellBook pour apprendre le sort Fireball
+			AddInventory((FirstCharacter), LivreSorts) // Ajoute le livre de sorts à l'inventaire via la fonction AddInventory
 			FirstCharacter.Gold -= 100
-
 		}
 
 	case 0:
