@@ -22,5 +22,5 @@ type Items struct {
 
 type Skills struct {
 	Name    string
-	learned bool
+	Learned bool
 }

@@ -13,12 +13,7 @@ var UseItem bool = false
 */
 func accessInventory(FirstCharacter *Character) {
 	fmt.Println("")
-	fmt.Println("◇─◇──◇────◇ INVENTAIRE ◇─────◇──◇─◇")
-	for i := 1; i <= len(FirstCharacter.Inventory); i++ {
-		if FirstCharacter.Inventory[i-1].Quantity > 0 {
-			fmt.Println(i, ":", FirstCharacter.Inventory[i-1].Name, ", quantité :", FirstCharacter.Inventory[i-1].Quantity)
-		}
-	}
+	DisplayInfo(FirstCharacter)
 
 	/*######################
 	# GESTION DES OBJETS #
@@ -36,14 +31,26 @@ func accessInventory(FirstCharacter *Character) {
 			fmt.Scanln(&answer2)
 			switch answer2 {
 			case "O", "o", "Oui", "oui":
-				if FirstCharacter.Inventory[answer1-1].Quantity > 0 {
-					FirstCharacter.Inventory[answer1-1].Quantity -= 1
-					fmt.Println("consommé")
-					TakePot(FirstCharacter) // lien vers la fonction TakePot
-					accessInventory(FirstCharacter)
-				} else {
-					fmt.Println("Pas assez de", FirstCharacter.Inventory[answer1-1].Name)
-					accessInventory(FirstCharacter)
+				if FirstCharacter.Inventory[answer1-1].Name == "potions de soin" {
+					if FirstCharacter.Inventory[answer1-1].Quantity > 0 {
+						FirstCharacter.Inventory[answer1-1].Quantity -= 1
+						fmt.Println("consommé")
+						TakePot(FirstCharacter) // lien vers la fonction TakePot
+						accessInventory(FirstCharacter)
+					} else {
+						fmt.Println("Pas assez de", FirstCharacter.Inventory[answer1-1].Name)
+						accessInventory(FirstCharacter)
+					}
+				} else if FirstCharacter.Inventory[answer1-1].Name == "Livre de sorts" {
+					if FirstCharacter.Inventory[answer1-1].Quantity > 0 {
+						FirstCharacter.Inventory[answer1-1].Quantity -= 1
+						fmt.Println("consommé")
+						accessInventory(FirstCharacter)
+						SpeellBook(FirstCharacter, Fireball) // lien vers la fonction SpellBook
+					} else {
+						fmt.Println("Pas assez de", FirstCharacter.Inventory[answer1-1].Name)
+						accessInventory(FirstCharacter)
+					}
 
 				}
 			case "N", "n", "non", "no", "No", "Non":
