@@ -28,7 +28,7 @@ func accessInventory(FirstCharacter *Character) {
 	# GESTION DES OBJETS #
 	######################*/
 	fmt.Println("")
-	fmt.Println("\n")
+	fmt.Println("")
 	fmt.Println("★¸„.-•~¹°”ˆ˜¨ ACTIONS ¨˜ˆ”°¹~•-.„¸★")
 	fmt.Println("|                                 |")
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")

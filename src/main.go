@@ -25,7 +25,7 @@ func main() {
 		fmt.Println("║                                              ║")
 		fmt.Println("╚══════════════════════════════════════════════╝")
 	}
-	fmt.Println("\n")
+	fmt.Println("")
 	fmt.Println("★¸„.-•~¹°”ˆ˜¨ ACTIONS ¨˜ˆ”°¹~•-.„¸★")
 	fmt.Println("|                                 |")
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
@@ -55,6 +55,6 @@ func main() {
 	case "0":
 		fmt.Println("Au revoir", FirstCharacter.Name, "!")
 	default:
-		fmt.Println("Choix invalide, réessayez.")
+		main()
 	}
 }

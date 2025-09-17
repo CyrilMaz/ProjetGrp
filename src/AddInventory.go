@@ -8,7 +8,7 @@ func AddInventory(p *Character, i Items) { // Ajoute un item à l'inventaire du 
 		if DisplayAddItem {
 			fmt.Println("Vous avez ajouté", i.Quantity, i.Name, "à votre inventaire.")
 		}
-	} else if InventoryLimitCheck(p) == false { // si l'inventaire est plein, on ne peut pas ajouter d'item
+	} else if !InventoryLimitCheck(p) { // si l'inventaire est plein, on ne peut pas ajouter d'item
 		fmt.Println("Votre inventaire est plein, vous ne pouvez pas ajouter d'item.")
 	} else {
 		for j := 0; j < len(p.Inventory); j++ { // cette boucle fort incrémente la quantité d'un item si il est déjà dans l'inventaire
