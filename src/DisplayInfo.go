@@ -3,8 +3,11 @@ package main
 import "fmt"
 
 func DisplayInfo(FirstCharacter *Character) {
-	fmt.Println("")
+	for spaces := 0; spaces < 40; spaces++ {
+		fmt.Print("\n")
+	}
 	fmt.Println("◇─◇──◇────◇ INFORMATION ◇─────◇──◇─◇")
+	fmt.Println("====================================")
 	fmt.Println("Nom :", FirstCharacter.Name)
 	fmt.Println("Classe :", FirstCharacter.Class)
 	fmt.Println("Niveau :", FirstCharacter.Level)
@@ -19,6 +22,7 @@ func DisplayInfo(FirstCharacter *Character) {
 	}
 	fmt.Println("")
 	fmt.Println("◇─◇──◇────◇ INVENTAIRE ◇─────◇──◇─◇")
+	fmt.Println("===================================")
 	for i := 1; i <= len(FirstCharacter.Inventory); i++ {
 		if FirstCharacter.Inventory[i-1].Quantity > 0 {
 			fmt.Println(i, ":", FirstCharacter.Inventory[i-1].Name, ", quantité :", FirstCharacter.Inventory[i-1].Quantity)
