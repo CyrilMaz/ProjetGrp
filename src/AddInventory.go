@@ -7,7 +7,7 @@ func AddInventory(p *Character, i Items) { // Ajoute un item à l'inventaire du 
 		p.Inventory = append(p.Inventory, i) // ajoute l'item à l'inventaire via la fonction append
 		fmt.Println("Vous avez ajouté", i.Quantity, i.Name, "à votre inventaire.")
 		return
-	} else if len(p.Inventory) >= 10 { // si l'inventaire est plein, on ne peut pas ajouter d'item
+	} else if InventoryLimitCheck(p) == false { // si l'inventaire est plein, on ne peut pas ajouter d'item
 		fmt.Println("Votre inventaire est plein, vous ne pouvez pas ajouter d'item.")
 		return
 	} else {

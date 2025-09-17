@@ -30,7 +30,7 @@ func accessInventory(FirstCharacter *Character) {
 			fmt.Println("êtes-vous certain de vouloir consommer un(e)", FirstCharacter.Inventory[answer1-1].Name, "? [O/N]")
 			fmt.Scanln(&answer2)
 			switch answer2 {
-			case "O", "o", "Oui", "oui":
+			case "O", "o", "Oui", "oui", "OUI", "OUi", "oUI", "oUi":
 				if FirstCharacter.Inventory[answer1-1].Name == "potions de soin" {
 					if FirstCharacter.Inventory[answer1-1].Quantity > 0 {
 						FirstCharacter.Inventory[answer1-1].Quantity -= 1
@@ -52,6 +52,21 @@ func accessInventory(FirstCharacter *Character) {
 						accessInventory(FirstCharacter)
 					}
 
+				} else if FirstCharacter.Inventory[answer1-1].Name == "Potion de poison" {
+					if FirstCharacter.Inventory[answer1-1].Quantity > 0 {
+						FirstCharacter.Inventory[answer1-1].Quantity -= 1
+						fmt.Println("consommé")
+						PoisonPot(FirstCharacter)
+						fmt.Println("\nAppuyez sur entrée pour continuer...")
+						fmt.Scanln()
+						accessInventory(FirstCharacter)
+					} else {
+						fmt.Println("Pas assez de", FirstCharacter.Inventory[answer1-1].Name)
+						accessInventory(FirstCharacter)
+					}
+
+				} else {
+					fmt.Println("Erreur, l'objet sélectionné ne peut pas être utilisé")
 				}
 			case "N", "n", "non", "no", "No", "Non":
 				fmt.Println("annulé")

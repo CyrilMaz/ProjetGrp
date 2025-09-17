@@ -15,8 +15,6 @@ func RemoveInventory(p *Character, i Items) {
 					fmt.Println("Vous avez enlevé", i.Name, "de votre inventaire")
 				}
 			}
-		} else {
-			fmt.Print("vous ne possédez pas cet item dans votre inventaire")
 		}
 	}
 }
