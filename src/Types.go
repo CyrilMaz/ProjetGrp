@@ -8,6 +8,7 @@ type Character struct {
 	Pvmax     int
 	Inventory []Items
 	Gold      int
+	Skills    []string
 }
 
 type Items struct {
@@ -17,4 +18,9 @@ type Items struct {
 	StatBoost       int
 	RespectiveClass string
 	Type            string
+}
+
+type Skills struct {
+	Name    string
+	learned bool
 }
