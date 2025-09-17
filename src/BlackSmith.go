@@ -30,7 +30,7 @@ func BlackSmith(p *Character) {
 
 	fmt.Println("\n¸„.-•~¹°”ˆ˜¨  FABRICATION  ¨˜ˆ”°¹~•-.„¸")
 
-	fmt.Println("| 1 : Chapeau de l’aventurier ·(5 PO) |")
+	fmt.Println("| 11 : Chapeau de l’aventurier ·(5 PO) |")
 	fmt.Println("| 2 : Tunique de l’aventurier ·(5 PO) |")
 	fmt.Println("| 3 : Bottes de l’aventurier ··(5 PO) |")
 	fmt.Println("|                                     |")
