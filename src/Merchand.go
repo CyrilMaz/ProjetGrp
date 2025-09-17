@@ -4,7 +4,7 @@ import "fmt"
 
 var PotionGratuite = true // Variable globale pour suivre si la potion gratuite a été prise
 
-func Merchand() {
+func Merchand(FirstCharacter *Character) {
 	fmt.Println("Bienvenue chez le marchand !")
 	fmt.Println("Que souhaitez-vous acheter ?")
 	fmt.Println("1 : Potion de soin (20 Argent)")
@@ -20,9 +20,9 @@ func Merchand() {
 			FirstCharacter.Inventory = append(FirstCharacter.Inventory, PotionSoin) //Ajoute la potion de soin à l'inventaire via la fonction append
 			PotionGratuite = false                                                  // Met à jour la variable pour indiquer que la potion gratuite a été prise
 		} else {
-			if FirstCharacter.Argent >= 20 {
+			if FirstCharacter.Gold >= 20 {
 				FirstCharacter.Inventory = append(FirstCharacter.Inventory, PotionSoin) //Ajoute la potion de soin à l'inventaire via la fonction append
-				FirstCharacter.Argent -= 20                                             // Déduit le coût de la potion de l'argent du personnage
+				FirstCharacter.Gold -= 20                                               // Déduit le coût de la potion de l'argent du personnage
 				fmt.Println("Vous avez acheté une potion de soin.")
 			} else {
 				fmt.Println("Vous n'avez pas assez d'argent pour acheter une potion de soin.")

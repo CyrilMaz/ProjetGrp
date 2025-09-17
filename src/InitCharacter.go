@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-var pv int = 40
 var FirstCharacter Character
 
 func initCharacter() {
@@ -23,5 +22,5 @@ func initCharacter() {
 			break
 		}
 	}
-	FirstCharacter = Character{nom, "Elfe", 1, pv, 100, []Items{PotionSoin}}
+	FirstCharacter = Character{nom, "Elfe", 1, 40, 100, []Items{PotionSoin}, 100}
 }

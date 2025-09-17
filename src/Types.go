@@ -7,7 +7,7 @@ type Character struct {
 	Pv        int
 	Pvmax     int
 	Inventory []Items
-	Argent    int
+	Gold      int
 }
 
 type Items struct {
