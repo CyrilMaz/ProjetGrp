@@ -6,7 +6,7 @@ var initalized bool = false
 var answer string
 
 func main() {
-	if initalized == false {
+	if !initalized {
 		initCharacter()
 		initalized = true
 	}

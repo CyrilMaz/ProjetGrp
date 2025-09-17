@@ -15,7 +15,7 @@ func initCharacter() {
 				match = false
 			}
 		}
-		if match == false {
+		if !match {
 			fmt.Println("Ton nom ne peut contenir que des lettres ! : A_Z, a_z")
 			fmt.Println("réessaie !")
 		} else {
