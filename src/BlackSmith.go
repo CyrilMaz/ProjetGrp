@@ -4,7 +4,6 @@ import "fmt"
 
 var Showlastcraft bool = false
 var lastcraft string = ""
-var lasterror string = ""
 
 func BlackSmith(p *Character) {
 	for spaces := 0; spaces < 40; spaces++ {
