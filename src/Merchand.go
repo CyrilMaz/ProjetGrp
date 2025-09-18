@@ -13,7 +13,7 @@ func Merchand(p *Character) {
 		fmt.Print("\n")
 	}
 	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⢔⢒⡿⠯⠥⢦⣦⣾⣄⠀⠀⠀⠀⠀⠀⠀")
-	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⢮⠊⠁⠀⠀⠀⠀⠈⠉⠛⠳time.Sleep(500 * time.Millisecond)⡀⠀⠀⠀⠀⠀")
+	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⢮⠊⠁⠀⠀⠀⠀⠈⠉⠛⠳⡀⠀⠀⠀⠀⠀")
 	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣧⣿⣝⡴⡔⠀⠀⠀⠀⠀⠀⠀⠀⠘⡀⠀⠀⠀⠀")
 	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⣀⣀⣦⣶⣿⣿⣯⣿⢽⠁⢰⣢⣶⣦⣌⠠⠴⠆⠘⣀⠀⠀⠀")
 	fmt.Println("⠀⠀⠀⠀⢀⠔⠁⠀⢂⠘⢻⢛⣛⠿⣝⠁⠀⠼⣁⡴⣖⣫⠙⠙⠿⡳⡅⠀⠀⠀")
@@ -77,7 +77,7 @@ func Merchand(p *Character) {
 				Merchand(p)
 				fmt.Println("Vous avez ajouté", PotionSoin.Quantity, PotionSoin.Name, "à votre inventaire.")
 			} else {
-				fmt.Println("Vous n'avez pas assez d'argent pour acheter une potion de soin.")
+				lasterror = "Vous n'avez pas assez d'argent pour acheter une potion de soin."
 				Merchand(p)
 			}
 		}
@@ -91,7 +91,7 @@ func Merchand(p *Character) {
 			Merchand(p)
 			fmt.Println("Vous avez ajouté", PotionPoison.Quantity, PotionPoison.Name, "à votre inventaire.")
 		} else {
-			fmt.Println("Vous n'avez pas assez d'argent pour acheter une potion de poison.")
+			lasterror = "Vous n'avez pas assez d'argent pour acheter une potion de poison."
 			Merchand(p)
 		}
 	case 3:
@@ -104,7 +104,7 @@ func Merchand(p *Character) {
 			Merchand(p)
 			fmt.Println("Vous avez ajouté", LivreSorts.Quantity, LivreSorts.Name, "à votre inventaire.")
 		} else {
-			fmt.Println("Vous n'avez pas assez d'argent pour acheter un livre de sorts.")
+			lasterror = "Vous n'avez pas assez d'argent pour acheter un livre de sorts."
 			Merchand(p)
 		}
 	case 4:
@@ -117,7 +117,7 @@ func Merchand(p *Character) {
 			Merchand(p)
 			fmt.Println("Vous avez ajouté", FourrureLoup.Quantity, FourrureLoup.Name, "à votre inventaire.")
 		} else {
-			fmt.Println("Vous n'avez pas assez d'argent pour acheter une fourrure de loup.")
+			lasterror = "Vous n'avez pas assez d'argent pour acheter une fourrure de loup."
 			Merchand(p)
 		}
 	case 5:
@@ -130,7 +130,7 @@ func Merchand(p *Character) {
 			Merchand(p)
 			fmt.Println("Vous avez ajouté", PeauTroll.Quantity, PeauTroll.Name, "à votre inventaire.")
 		} else {
-			fmt.Println("Vous n'avez pas assez d'argent pour acheter une peau de troll.")
+			lasterror = "Vous n'avez pas assez d'argent pour acheter une peau de troll."
 			Merchand(p)
 		}
 	case 6:
@@ -143,7 +143,7 @@ func Merchand(p *Character) {
 			Merchand(p)
 			fmt.Println("Vous avez ajouté", CuirSanglier.Quantity, CuirSanglier.Name, "à votre inventaire.")
 		} else {
-			fmt.Println("Vous n'avez pas assez d'argent pour acheter un cuir de sanglier.")
+			lasterror = "Vous n'avez pas assez d'argent pour acheter un cuir de sanglier."
 			Merchand(p)
 		}
 	case 7:
@@ -156,7 +156,7 @@ func Merchand(p *Character) {
 			Merchand(p)
 			fmt.Println("Vous avez ajouté", PlumeCorbeau.Quantity, PlumeCorbeau.Name, "à votre inventaire.")
 		} else {
-			fmt.Println("Vous n'avez pas assez d'argent pour acheter une plume de corbeau.")
+			lasterror = "Vous n'avez pas assez d'argent pour acheter une plume de corbeau."
 			Merchand(p)
 		}
 	case 8:
@@ -167,7 +167,7 @@ func Merchand(p *Character) {
 				UpgradeInventorySlot(p)
 				c++
 				FirstCharacter.Gold -= 30
-				lastPurchase = fmt.Sprintf("Vous avez augmenté votre inventaire de 10 slots.")
+				lastPurchase = "Vous avez augmenté votre inventaire de 10 slots."
 				Merchand(p)
 			} else if c >= 3 {
 				lasterror = "Vous avez déjà acheté le maximum de slots d'inventaire (3)."
@@ -182,7 +182,7 @@ func Merchand(p *Character) {
 		fmt.Println("Merci de votre visite !")
 		main() // Retour au menu principal
 	default: // fonction default sert à gérer les cas non prévus
-		fmt.Println("Choix invalide, réessayez.") // Message d'erreur pour un choix invalide
+		lasterror = "Choix invalide, réessayez." // Message d'erreur pour un choix invalide
 		Merchand(p)
 	}
 }
