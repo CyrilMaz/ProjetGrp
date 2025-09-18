@@ -36,11 +36,13 @@ func initCharacter() {
 	for spaces := 0; spaces < 40; spaces++ {
 		fmt.Print("\n")
 	}
-	fmt.Println("★ Quelle est ta classe ?")
-	fmt.Println("1 : Humain")
-	fmt.Println("2 : Elfe")
-	fmt.Println("3 : Nain")
-	fmt.Scanln(&Class)
+	for Class != "1" || Class != "2" || Class != "3" {
+		fmt.Println("★ Quelle est ta classe ?")
+		fmt.Println("1 : Humain")
+		fmt.Println("2 : Elfe")
+		fmt.Println("3 : Nain")
+		fmt.Scanln(&Class)
+	}
 	switch Class {
 	case "1":
 		Class = "Humain"
