@@ -33,3 +33,11 @@ type Equipment struct {
 	Worn bool
 	Name string
 }
+
+
+type Monster struct {
+	Name string
+	Pv  int 
+	Pvmax int 
+	Attack int
+}
