@@ -11,6 +11,18 @@ func DisplayInfo(FirstCharacter *Character) {
 	fmt.Println("Nom :", FirstCharacter.Name)
 	fmt.Println("Classe :", FirstCharacter.Class)
 	fmt.Println("Niveau :", FirstCharacter.Level)
+	if FirstCharacter.Equipment[0].Worn {
+		FirstCharacter.Pv += 10
+		FirstCharacter.Pvmax += 10
+	}
+	if FirstCharacter.Equipment[1].Worn {
+		FirstCharacter.Pv += 10
+		FirstCharacter.Pvmax += 10
+	}
+	if FirstCharacter.Equipment[2].Worn {
+		FirstCharacter.Pv += 10
+		FirstCharacter.Pvmax += 10
+	}
 	fmt.Println("Points de vie actuels :", FirstCharacter.Pv)
 	fmt.Println("Points de vie max :", FirstCharacter.Pvmax)
 	fmt.Println("Pieces d'or :", FirstCharacter.Gold)

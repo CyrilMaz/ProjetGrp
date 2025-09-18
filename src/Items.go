@@ -7,6 +7,27 @@ var FourrureLoup = Items{"Fourrure de loup", 1, "craft", 0, "all", "Material"}
 var PeauTroll = Items{"Peau de troll", 1, "craft", 0, "all", "Material"}
 var CuirSanglier = Items{"Cuir de sanglier", 1, "craft", 0, "all", "Material"}
 var PlumeCorbeau = Items{"Plume de corbeau", 1, "craft", 0, "all", "Material"}
-var ChapeauAventurier = Items{"Chapeau de l’aventurier", 1, "head", 10, "all", "Equipment"}
-var TuniqueAventurier = Items{"Tunique de l’aventurier", 1, "body", 25, "all", "Equipment"}
-var BottesAventurier = Items{"Bottes de l’aventurier", 1, "legs", 15, "all", "Equipment"}
+var ChapeauAventurier = Items{
+	Name:            "Chapeau d'aventurier",
+	Quantity:        1,
+	StatName:        "Head",
+	StatBoost:       10, // ou la valeur que tu veux
+	RespectiveClass: "all",
+	Type:            "Equipment",
+}
+var TuniqueAventurier = Items{
+	Name:            "Tunique d'aventurier",
+	Quantity:        1,
+	StatName:        "body",
+	StatBoost:       25,
+	RespectiveClass: "all",
+	Type:            "Equipment",
+}
+var BottesAventurier = Items{
+	Name:            "Bottes d'aventurier",
+	Quantity:        1,
+	StatName:        "legs",
+	StatBoost:       15,
+	RespectiveClass: "all",
+	Type:            "Equipment",
+}
