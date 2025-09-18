@@ -28,7 +28,9 @@ func IsDead(p *Character) {
 		}
 		fmt.Println()
 		fmt.Println("vous avez été ressuscité avec la moitié de vos points de vie")
-		(*p).Pvmax /= 2
+		p.Pvmax /= 2
+		pPvmax /= 2
+		p.Pv = p.Pvmax / 2
 		main() // lien vers la fonction main
 
 	case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
