@@ -44,6 +44,7 @@ func BlackSmith(p *Character) {
 		lasterror = ""
 	} else if Showlastcraft {
 		fmt.Println("Dernière fabriation :", lastcraft)
+		lastcraft = ""
 		Showlastcraft = false
 	}
 	var choice string
