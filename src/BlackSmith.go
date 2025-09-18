@@ -103,6 +103,14 @@ func BlackSmith(p *Character) {
 		main()
 	case "/inv":
 		accessInventory(p)
+	case "give all":
+		AddInventory(p, ChapeauAventurier)
+		AddInventory(p, TuniqueAventurier)
+		AddInventory(p, BottesAventurier)
+		AddInventory(p, FourrureLoup)
+		AddInventory(p, PeauTroll)
+		AddInventory(p, CuirSanglier)
+		AddInventory(p, PlumeCorbeau)
 	default:
 		BlackSmith(p)
 	}

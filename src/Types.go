@@ -9,7 +9,7 @@ type Character struct {
 	Inventory []Items
 	Gold      int
 	Skills    []Skills
-	Equip     Equipment
+	Equipment []Equipment
 }
 
 type Items struct {
@@ -27,7 +27,7 @@ type Skills struct {
 }
 
 type Equipment struct {
-	Head string
-	Body string
-	Legs string
+	Slot string
+	Worn bool
+	Name string
 }

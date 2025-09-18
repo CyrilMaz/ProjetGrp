@@ -60,5 +60,5 @@ func initCharacter() {
 		fmt.Scanln(&Class)
 
 	}
-	FirstCharacter = Character{nom, pClass, 1, pPvmax / 2, pPvmax, []Items{Items{"potions de soin", 3, "soin", 20, "all", "Consumable"}}, 100, []Skills{{"coup de poing", true}}, Equipment{"Aucun", "Aucun", "Aucun"}}
+	FirstCharacter = Character{nom, pClass, 1, pPvmax / 2, pPvmax, []Items{Items{"potions de soin", 3, "soin", 20, "all", "Consumable"}}, 100, []Skills{{"coup de poing", true}}, []Equipment{{"Head", false, ""}, {"Body", false, ""}, {"Legs", false, ""}}}
 }
