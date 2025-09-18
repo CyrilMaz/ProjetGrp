@@ -58,6 +58,8 @@ func main() {
 		Merchand(&FirstCharacter)
 	case "4":
 		BlackSmith(&FirstCharacter)
+	case "5":
+		trainingFight(&FirstCharacter, &Goblin)
 	case "/kill":
 		FirstCharacter.Pv = 0
 		IsDead(&FirstCharacter)
