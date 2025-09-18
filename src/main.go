@@ -57,6 +57,9 @@ func main() {
 	case "/kill":
 		FirstCharacter.Pv = 0
 		IsDead(&FirstCharacter)
+	case "/gold":
+		FirstCharacter.Gold += 1000
+		main()
 	case "0":
 		fmt.Println("Au revoir", FirstCharacter.Name, "!")
 		os.Exit(0)

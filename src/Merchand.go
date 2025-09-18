@@ -6,13 +6,14 @@ var PotionGratuite = true // Variable globale pour suivre si la potion gratuite 
 var DisplayAddItem = true
 var ShowlastPurchase = false
 var lastPurchase = ""
+var c int = 0
 
 func Merchand(p *Character) {
 	for spaces := 0; spaces < 40; spaces++ {
 		fmt.Print("\n")
 	}
 	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⢔⢒⡿⠯⠥⢦⣦⣾⣄⠀⠀⠀⠀⠀⠀⠀")
-	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⢮⠊⠁⠀⠀⠀⠀⠈⠉⠛⠳⡀⠀⠀⠀⠀⠀")
+	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⢮⠊⠁⠀⠀⠀⠀⠈⠉⠛⠳time.Sleep(500 * time.Millisecond)⡀⠀⠀⠀⠀⠀")
 	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣧⣿⣝⡴⡔⠀⠀⠀⠀⠀⠀⠀⠀⠘⡀⠀⠀⠀⠀")
 	fmt.Println("⠀⠀⠀⠀⠀⠀⠀⣀⣀⣦⣶⣿⣿⣯⣿⢽⠁⢰⣢⣶⣦⣌⠠⠴⠆⠘⣀⠀⠀⠀")
 	fmt.Println("⠀⠀⠀⠀⢀⠔⠁⠀⢂⠘⢻⢛⣛⠿⣝⠁⠀⠼⣁⡴⣖⣫⠙⠙⠿⡳⡅⠀⠀⠀")
@@ -43,11 +44,15 @@ func Merchand(p *Character) {
 	fmt.Println("| 5 : Peau de troll ········(7 PO)")
 	fmt.Println("| 6 : Cuir de sanglier ·····(3 PO)")
 	fmt.Println("| 7 : Plume de corbeau ·····(1 PO)")
+	fmt.Println("| 8 : +10 slots inventaire·(30 PO)")
 	fmt.Println("|                                |")
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
 	fmt.Println("|    0 : Sortir de la boutique   |")
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
-	if ShowlastPurchase {
+	if lasterror != "" {
+		fmt.Println("Erreur :", lasterror)
+		lasterror = ""
+	} else if ShowlastPurchase {
 		fmt.Println("Dernier achat :", lastPurchase)
 		ShowlastPurchase = false
 	}
@@ -73,6 +78,7 @@ func Merchand(p *Character) {
 				fmt.Println("Vous avez ajouté", PotionSoin.Quantity, PotionSoin.Name, "à votre inventaire.")
 			} else {
 				fmt.Println("Vous n'avez pas assez d'argent pour acheter une potion de soin.")
+				Merchand(p)
 			}
 		}
 	case 2:
@@ -86,6 +92,7 @@ func Merchand(p *Character) {
 			fmt.Println("Vous avez ajouté", PotionPoison.Quantity, PotionPoison.Name, "à votre inventaire.")
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter une potion de poison.")
+			Merchand(p)
 		}
 	case 3:
 		ShowlastPurchase = true
@@ -98,6 +105,7 @@ func Merchand(p *Character) {
 			fmt.Println("Vous avez ajouté", LivreSorts.Quantity, LivreSorts.Name, "à votre inventaire.")
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter un livre de sorts.")
+			Merchand(p)
 		}
 	case 4:
 		ShowlastPurchase = true
@@ -110,6 +118,7 @@ func Merchand(p *Character) {
 			fmt.Println("Vous avez ajouté", FourrureLoup.Quantity, FourrureLoup.Name, "à votre inventaire.")
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter une fourrure de loup.")
+			Merchand(p)
 		}
 	case 5:
 		ShowlastPurchase = true
@@ -122,6 +131,7 @@ func Merchand(p *Character) {
 			fmt.Println("Vous avez ajouté", PeauTroll.Quantity, PeauTroll.Name, "à votre inventaire.")
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter une peau de troll.")
+			Merchand(p)
 		}
 	case 6:
 		ShowlastPurchase = true
@@ -134,6 +144,7 @@ func Merchand(p *Character) {
 			fmt.Println("Vous avez ajouté", CuirSanglier.Quantity, CuirSanglier.Name, "à votre inventaire.")
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter un cuir de sanglier.")
+			Merchand(p)
 		}
 	case 7:
 		ShowlastPurchase = true
@@ -146,12 +157,32 @@ func Merchand(p *Character) {
 			fmt.Println("Vous avez ajouté", PlumeCorbeau.Quantity, PlumeCorbeau.Name, "à votre inventaire.")
 		} else {
 			fmt.Println("Vous n'avez pas assez d'argent pour acheter une plume de corbeau.")
+			Merchand(p)
+		}
+	case 8:
+		ShowlastPurchase = true
+		if FirstCharacter.Gold >= 30 {
+			if c < 3 {
+				DisplayAddItem = false
+				UpgradeInventorySlot(p)
+				c++
+				FirstCharacter.Gold -= 30
+				lastPurchase = fmt.Sprintf("Vous avez augmenté votre inventaire de 10 slots.")
+				Merchand(p)
+			} else if c >= 3 {
+				lasterror = "Vous avez déjà acheté le maximum de slots d'inventaire (3)."
+				Merchand(p)
+			}
+		} else {
+			lasterror = "Vous n'avez pas assez d'argent pour acheter des slots d'inventaire."
+			Merchand(p)
+
 		}
 	case 0:
 		fmt.Println("Merci de votre visite !")
 		main() // Retour au menu principal
 	default: // fonction default sert à gérer les cas non prévus
 		fmt.Println("Choix invalide, réessayez.") // Message d'erreur pour un choix invalide
-		fmt.Scanln(&choice)                       // Lire le choix de l'utilisateur
+		Merchand(p)
 	}
 }

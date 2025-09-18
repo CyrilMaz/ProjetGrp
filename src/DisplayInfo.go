@@ -14,6 +14,7 @@ func DisplayInfo(FirstCharacter *Character) {
 	fmt.Println("Points de vie actuels :", FirstCharacter.Pv)
 	fmt.Println("Points de vie max :", FirstCharacter.Pvmax)
 	fmt.Println("Pieces d'or :", FirstCharacter.Gold)
+	fmt.Println("Emplacements d'inventaire max :", FirstCharacter.MaxInventory)
 	fmt.Println("Compétences apprises :")
 	for i := 0; i < len(FirstCharacter.Skills); i++ {
 		if FirstCharacter.Skills[i].Learned {
