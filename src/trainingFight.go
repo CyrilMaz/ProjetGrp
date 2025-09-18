@@ -4,10 +4,15 @@ import "fmt"
 
 var AttackChoice string
 var PlayerAttack Skills
+var CompteurTour int
 
 func trainingFight(p *Character, Goblin *Monster) {
 	initGoblin()
+	CompteurTour = 0
 	for p.Pv > 0 && Goblin.Pv > 0 {
+		fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+		fmt.Println("|        Tour de jeu n°", CompteurTour, "      |")
+		fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
 		if p.Pv > 0 {
 			IsDead(p)
 		} else if Goblin.Pv > 0 {
@@ -236,6 +241,9 @@ func trainingFight(p *Character, Goblin *Monster) {
 			main()
 		}
 		ct++
+		CompteurTour++
 		GoblinPattern(Goblin)
+		fmt.Println(ActionTour)
+		fmt.Println(ResultatTour)
 	}
 }
