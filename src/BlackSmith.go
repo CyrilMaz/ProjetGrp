@@ -63,11 +63,11 @@ func BlackSmith(p *Character) {
 			AddInventory(p, ChapeauAventurier)
 			lastcraft = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", ChapeauAventurier.Quantity, ChapeauAventurier.Name)
 		} else if p.Gold < 5 {
-			lastcraft = "Vous n'avez pas assez d'or pour fabriquer cet objet."
+			lasterror = "Vous n'avez pas assez d'or pour fabriquer cet objet."
 		} else if !HasItem(p, PlumeCorbeau, 1) {
-			lastcraft = "Il vous manque une Plume de Corbeau pour fabriquer cet objet."
+			lasterror = "Il vous manque une Plume de Corbeau pour fabriquer cet objet."
 		} else if !HasItem(p, CuirSanglier, 1) {
-			lastcraft = "Il vous manque 1 de Cuir de Sanglier pour fabriquer cet objet."
+			lasterror = "Il vous manque 1 de Cuir de Sanglier pour fabriquer cet objet."
 		}
 		BlackSmith(p)
 	case "2":
@@ -97,9 +97,9 @@ func BlackSmith(p *Character) {
 		} else if p.Gold < 5 {
 			lasterror = "Vous n'avez pas assez d'or pour fabriquer cet objet."
 		} else if !HasItem(p, FourrureLoup, 1) {
-			lastcraft = "Il vous manque 1 de Fourrure de Loup pour fabriquer cet objet."
+			lasterror = "Il vous manque 1 de Fourrure de Loup pour fabriquer cet objet."
 		} else if !HasItem(p, CuirSanglier, 1) {
-			lastcraft = "Il vous manque 1 de Cuir de Sanglier pour fabriquer cet objet."
+			lasterror = "Il vous manque 1 de Cuir de Sanglier pour fabriquer cet objet."
 		}
 		BlackSmith(p)
 	case "0":
