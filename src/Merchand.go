@@ -54,6 +54,7 @@ func Merchand(p *Character) {
 		lasterror = ""
 	} else if ShowlastPurchase {
 		fmt.Println("Dernier achat :", lastPurchase)
+		lastPurchase = ""
 		ShowlastPurchase = false
 	}
 	var choice int

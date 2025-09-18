@@ -6,12 +6,11 @@ var answer1 int
 var answer2 string
 var answer3 string
 var UseItem bool = false
+var ShowlastAction bool = false
+var ShowlastAction2 bool = false
+var lastAction string = ""
+var lastAction2 string = ""
 
-/*
-#############################
-# AFFICHAGE DE L'INVENTAIRE #
-#############################
-*/
 func accessInventory(p *Character) {
 	for spaces := 0; spaces < 40; spaces++ {
 		fmt.Print("\n")
@@ -35,6 +34,16 @@ func accessInventory(p *Character) {
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
 	fmt.Println("|   0 revenir au menu principal   |")
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+	if lasterror != "" {
+		fmt.Println("Erreur :", lasterror)
+		lasterror = ""
+	} else if ShowlastAction {
+		fmt.Println("Dernière action :", lastAction)
+		ShowlastAction = false
+	} else if ShowlastAction2 {
+		fmt.Println("Dernière action :", lastAction2)
+		ShowlastAction2 = false
+	}
 	fmt.Println("\n★ tapez le numéro d'un objet pour l'utiliser")
 	fmt.Scanln(&answer1)
 
@@ -48,44 +57,46 @@ func accessInventory(p *Character) {
 				if p.Inventory[answer1-1].Name == "potions de soin" {
 					if p.Inventory[answer1-1].Quantity > 0 {
 						p.Inventory[answer1-1].Quantity -= 1
-						fmt.Println("consommé")
+						lastAction = fmt.Sprintf("vous avez consommé 1 %s et récupéré %d points de vie", p.Inventory[answer1-1].Name, p.Inventory[answer1-1].StatBoost)
+						ShowlastAction = true
 						TakePot(p) // lien vers la fonction TakePot
 						accessInventory(p)
 					} else {
-						fmt.Println("Pas assez de", p.Inventory[answer1-1].Name)
+						lasterror = fmt.Sprintf("Pas assez de", p.Inventory[answer1-1].Name)
 						accessInventory(p)
 					}
 				} else if p.Inventory[answer1-1].Name == "Livre de sorts" {
 					if p.Inventory[answer1-1].Quantity > 0 {
 						p.Inventory[answer1-1].Quantity -= 1
-						fmt.Println("consommé")
+						lastAction = fmt.Sprintf("vous avez consommé 1 %s et appris le sort Boule de feu", p.Inventory[answer1-1].Name)
+						ShowlastAction = true
 						SpeellBook(p, Fireball) // lien vers la fonction SpellBook
+						accessInventory(p)
 					} else {
-						fmt.Println("Pas assez de", p.Inventory[answer1-1].Name)
+						lasterror = fmt.Sprintf("Pas assez de", p.Inventory[answer1-1].Name)
 						accessInventory(p)
 					}
 
 				} else if p.Inventory[answer1-1].Name == "Potion de poison" {
 					if p.Inventory[answer1-1].Quantity > 0 {
 						p.Inventory[answer1-1].Quantity -= 1
-						fmt.Println("consommé")
 						PoisonPot(p)
+						lastAction = fmt.Sprintf("vous avez consommé 1 %s et vous vous êtes infligé %d points de dégats", p.Inventory[answer1-1].Name, p.Inventory[answer1-1].StatBoost)
+						ShowlastAction = true
 						fmt.Println("\n★ Appuyez sur entrée pour continuer...")
 						fmt.Scanln()
 						accessInventory(p)
 					} else {
-						fmt.Println("Pas assez de", p.Inventory[answer1-1].Name)
+						lasterror = fmt.Sprintf("Pas assez de", p.Inventory[answer1-1].Name)
 						accessInventory(p)
 					}
 
 				} else {
-					fmt.Println("Erreur, l'objet sélectionné ne peut pas être utilisé")
+					lasterror = "Erreur, l'objet sélectionné ne peut pas être utilisé"
 				}
 			case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
-				fmt.Println("annulé")
+				lasterror = "annulé"
 				accessInventory(p)
-			default:
-				fmt.Println("Retour au menu précédent")
 			}
 		} else if p.Inventory[answer1-1].Type == "Equipment" {
 			fmt.Println("★ êtes-vous certain de vouloir équiper :", p.Inventory[answer1-1].Name, "? [O/N]")
@@ -99,24 +110,27 @@ func accessInventory(p *Character) {
 				if p.Inventory[answer1-1].StatName == "Head" {
 					if p.Equipment[0].Name != "" {
 						fmt.Println("Un équipement est déjà sur la tête :", p.Equipment[0].Name)
-						fmt.Println("Voulez-vous le remplacer ? [O/N]")
+						fmt.Println("★ Voulez-vous le remplacer ? [O/N]")
 						fmt.Scanln(&answer3)
 						switch answer3 {
 						case "o", "O", "ou", "oU", "Ou", "OU", "oui", "ouI", "oUi", "oUI", "Oui", "OuI", "OUi", "OUI":
 							AddInventory(p, Items{p.Equipment[0].Name, 1, "Equipment", 0, p.Inventory[answer1-1].StatName, "Equipment"}) // remet l'ancien équipement dans l'inventaire
-							fmt.Println("Ancien équipement ajouté à l'inventaire :", p.Equipment[0].Name)
+							lastAction = fmt.Sprintf("vous avez déséquipé 1 %s, il se trouve maintenant dans votre inventaire", p.Equipment[0].Name)
+							ShowlastAction = true
 							p.Equipment[0].Name = p.Inventory[answer1-1].Name
 							RemoveInventory(p, p.Inventory[answer1-1], 1)
-							fmt.Println("Vous avez équipé :", p.Inventory[answer1-1].Name)
+							lastAction2 = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
+							ShowlastAction2 = true
 							accessInventory(p)
 						case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
-							fmt.Println("annulé")
+							lasterror = "annulé"
 							accessInventory(p)
 						}
 					} else if p.Equipment[0].Name == "" {
 						p.Equipment[0].Name = p.Inventory[answer1-1].Name
 						RemoveInventory(p, p.Inventory[answer1-1], 1)
-						fmt.Println("Vous avez équipé :", p.Inventory[answer1-1].Name)
+						lastAction = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
+						ShowlastAction = true
 						p.Equipment[0].Worn = true
 						accessInventory(p)
 					}
@@ -127,24 +141,27 @@ func accessInventory(p *Character) {
 				} else if p.Inventory[answer1-1].StatName == "body" {
 					if p.Equipment[1].Name != "" {
 						fmt.Println("Une armure est déjà équipée :", p.Equipment[1].Name)
-						fmt.Println("Voulez-vous la remplacer ? [O/N]")
+						fmt.Println("★ Voulez-vous la remplacer ? [O/N]")
 						fmt.Scanln(&answer3)
 						switch answer3 {
 						case "o", "O", "ou", "oU", "Ou", "OU", "oui", "ouI", "oUi", "oUI", "Oui", "OuI", "OUi", "OUI":
-							AddInventory(p, Items{p.Equipment[1].Name, 1, "Equipment", 0, p.Inventory[answer1-1].StatName, "Equipment"})
-							fmt.Println("Ancienne armure ajoutée à l'inventaire :", p.Equipment[1].Name)
+							AddInventory(p, Items{p.Equipment[1].Name, 1, "Equipment", 0, p.Inventory[answer1-1].StatName, "Equipment"}) // remet l'ancien équipement dans l'inventaire
+							lastAction = fmt.Sprintf("vous avez déséquipé 1 %s, il se trouve maintenant dans votre inventaire", p.Equipment[1].Name)
+							ShowlastAction = true
 							p.Equipment[1].Name = p.Inventory[answer1-1].Name
 							RemoveInventory(p, p.Inventory[answer1-1], 1)
-							fmt.Println("Vous avez équipé :", p.Inventory[answer1-1].Name)
+							lastAction2 = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
+							ShowlastAction2 = true
 							accessInventory(p)
 						case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
-							fmt.Println("annulé")
+							lasterror = "annulé"
 							accessInventory(p)
 						}
 					} else if p.Equipment[1].Name == "" {
 						p.Equipment[1].Name = p.Inventory[answer1-1].Name
 						RemoveInventory(p, p.Inventory[answer1-1], 1)
-						fmt.Println("Vous avez équipé :", p.Inventory[answer1-1].Name)
+						lastAction = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
+						ShowlastAction = true
 						p.Equipment[1].Worn = true
 						accessInventory(p)
 					}
@@ -155,36 +172,38 @@ func accessInventory(p *Character) {
 				} else if p.Inventory[answer1-1].StatName == "legs" {
 					if p.Equipment[2].Name != "" {
 						fmt.Println("Un pantalon est déjà équipé :", p.Equipment[2].Name)
-						fmt.Println("Voulez-vous le remplacer ? [O/N]")
+						fmt.Println("★ Voulez-vous le remplacer ? [O/N]")
 						fmt.Scanln(&answer3)
 						switch answer3 {
 						case "o", "O", "ou", "oU", "Ou", "OU", "oui", "ouI", "oUi", "oUI", "Oui", "OuI", "OUi", "OUI":
-							AddInventory(p, Items{p.Equipment[2].Name, 1, "Equipment", 0, p.Inventory[answer1-1].StatName, "Equipment"})
-							fmt.Println("Ancien pantalon ajouté à l'inventaire :", p.Equipment[2].Name)
+							AddInventory(p, Items{p.Equipment[2].Name, 1, "Equipment", 0, p.Inventory[answer1-1].StatName, "Equipment"}) // remet l'ancien équipement dans l'inventaire
+							lastAction = fmt.Sprintf("vous avez déséquipé 1 %s, il se trouve maintenant dans votre inventaire", p.Equipment[2].Name)
+							ShowlastAction = true
 							p.Equipment[2].Name = p.Inventory[answer1-1].Name
 							RemoveInventory(p, p.Inventory[answer1-1], 1)
-							fmt.Println("Vous avez équipé :", p.Inventory[answer1-1].Name)
+							lastAction2 = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
+							ShowlastAction2 = true
 							accessInventory(p)
 						case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
-							fmt.Println("annulé")
+							lasterror = "annulé"
 							accessInventory(p)
 						}
 					} else if p.Equipment[2].Name == "" {
 						p.Equipment[2].Name = p.Inventory[answer1-1].Name
 						RemoveInventory(p, p.Inventory[answer1-1], 1)
-						fmt.Println("Vous avez équipé :", p.Inventory[answer1-1].Name)
+						lastAction = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
+						ShowlastAction = true
 						p.Equipment[2].Worn = true
 						accessInventory(p)
-
 					}
 				}
 			case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
-				fmt.Println("annulé")
+				lasterror = "annulé"
 				accessInventory(p)
 			}
 
 		} else {
-			fmt.Println("Erreur, l'objet sélectionné ne peut pas être utilisé")
+			lasterror = "Erreur, l'objet sélectionné ne peut pas être utilisé"
 		}
 	case 0:
 		main()
