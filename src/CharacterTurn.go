@@ -30,7 +30,6 @@ func CharacterTurn(p *Character) string {
 	case 2:
 		fmt.Println(p.Name, "inventaire !")
 		return "inventory"
-		accessInventory(p) // Accède à l'inventaire pour le consulter
 	case 0:
 		fmt.Println(p.Name, "battre en retraite")
 		return "flee"
