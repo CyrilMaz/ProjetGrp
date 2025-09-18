@@ -4,6 +4,7 @@ import "fmt"
 
 var Class string
 var pClass string
+var matchClass bool
 var pPvmax int
 var FirstCharacter Character
 
@@ -36,31 +37,33 @@ func initCharacter() {
 	for spaces := 0; spaces < 40; spaces++ {
 		fmt.Print("\n")
 	}
-	for Class != "1" || Class != "2" || Class != "3" {
+	for !matchClass {
 		fmt.Println("★ Quelle est ta classe ?")
 		fmt.Println("1 : Humain")
 		fmt.Println("2 : Elfe")
 		fmt.Println("3 : Nain")
 		fmt.Scanln(&Class)
-	}
-	switch Class {
-	case "1":
-		Class = "Humain"
-		pClass = "Humain"
-		pPvmax = 100
+		switch Class {
+		case "1":
+			Class = "Humain"
+			pClass = "Humain"
+			pPvmax = 100
+			matchClass = true
+		case "2":
+			Class = "Elfe"
+			pClass = "Elfe"
+			pPvmax = 80
+			matchClass = true
+		case "3":
+			Class = "Nain"
+			pClass = "Nain"
+			pPvmax = 120
+			matchClass = true
+		default:
+			fmt.Println("Choix invalide, réessayez.")
+			fmt.Scanln(&Class)
 
-	case "2":
-		Class = "Elfe"
-		pClass = "Elfe"
-		pPvmax = 80
-	case "3":
-		Class = "Nain"
-		pClass = "Nain"
-		pPvmax = 120
-	default:
-		fmt.Println("Choix invalide, réessayez.")
-		fmt.Scanln(&Class)
-
+		}
 	}
 	FirstCharacter = Character{nom, pClass, 1, pPvmax / 2, pPvmax, []Items{Items{"potions de soin", 3, "soin", 20, "all", "Consumable"}}, 100, []Skills{{"coup de poing", true}}, []Equipment{{"Head", false, ""}, {"Body", false, ""}, {"Legs", false, ""}}, 10, true}
 }
