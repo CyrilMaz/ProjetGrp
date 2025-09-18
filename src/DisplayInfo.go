@@ -25,6 +25,15 @@ func DisplayInfo(FirstCharacter *Character) {
 			fmt.Print(", ")
 		}
 	}
+	fmt.Println("\nÉquipements portés :")
+	for i := 0; i < len(FirstCharacter.Equipment); i++ {
+		fmt.Print(FirstCharacter.Equipment[i].Name)
+		if i == len(FirstCharacter.Equipment)-1 {
+			fmt.Print(".")
+		} else {
+			fmt.Print(", ")
+		}
+	}
 	fmt.Print("\n")
 	fmt.Println("\n★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
 	fmt.Println("|★ Appuyez sur une Entrée pour sortir du menu |")

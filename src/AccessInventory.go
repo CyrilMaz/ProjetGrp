@@ -97,7 +97,7 @@ func accessInventory(p *Character) {
 				  # Si l'equipement est un casque #
 				  #################################*/
 				if p.Inventory[answer1-1].StatName == "Head" {
-					if p.Equipment[0].Worn {
+					if p.Equipment[0].Name != "" {
 						fmt.Println("Un équipement est déjà sur la tête :", p.Equipment[0].Name)
 						fmt.Println("Voulez-vous le remplacer ? [O/N]")
 						fmt.Scanln(&answer3)
@@ -113,10 +113,11 @@ func accessInventory(p *Character) {
 							fmt.Println("annulé")
 							accessInventory(p)
 						}
-					} else {
-						p.Equipment[0].Worn = true
+					} else if p.Equipment[0].Name == "" {
 						p.Equipment[0].Name = p.Inventory[answer1-1].Name
+						RemoveInventory(p, p.Inventory[answer1-1], 1)
 						fmt.Println("Vous avez équipé :", p.Inventory[answer1-1].Name)
+						p.Equipment[0].Worn = true
 						accessInventory(p)
 					}
 
@@ -124,7 +125,7 @@ func accessInventory(p *Character) {
 					  # Si l'equipement est une armure #
 					  ##################################*/
 				} else if p.Inventory[answer1-1].StatName == "body" {
-					if p.Equipment[1].Worn {
+					if p.Equipment[1].Name != "" {
 						fmt.Println("Une armure est déjà équipée :", p.Equipment[1].Name)
 						fmt.Println("Voulez-vous la remplacer ? [O/N]")
 						fmt.Scanln(&answer3)
@@ -140,10 +141,11 @@ func accessInventory(p *Character) {
 							fmt.Println("annulé")
 							accessInventory(p)
 						}
-					} else {
-						p.Equipment[1].Worn = true
+					} else if p.Equipment[1].Name == "" {
 						p.Equipment[1].Name = p.Inventory[answer1-1].Name
+						RemoveInventory(p, p.Inventory[answer1-1], 1)
 						fmt.Println("Vous avez équipé :", p.Inventory[answer1-1].Name)
+						p.Equipment[1].Worn = true
 						accessInventory(p)
 					}
 
@@ -151,7 +153,7 @@ func accessInventory(p *Character) {
 					  # Si l'equipement est un pantalon #
 					  ###################################*/
 				} else if p.Inventory[answer1-1].StatName == "legs" {
-					if p.Equipment[2].Worn {
+					if p.Equipment[2].Name != "" {
 						fmt.Println("Un pantalon est déjà équipé :", p.Equipment[2].Name)
 						fmt.Println("Voulez-vous le remplacer ? [O/N]")
 						fmt.Scanln(&answer3)
@@ -167,11 +169,13 @@ func accessInventory(p *Character) {
 							fmt.Println("annulé")
 							accessInventory(p)
 						}
-					} else {
-						p.Equipment[2].Worn = true
+					} else if p.Equipment[2].Name == "" {
 						p.Equipment[2].Name = p.Inventory[answer1-1].Name
+						RemoveInventory(p, p.Inventory[answer1-1], 1)
 						fmt.Println("Vous avez équipé :", p.Inventory[answer1-1].Name)
+						p.Equipment[2].Worn = true
 						accessInventory(p)
+
 					}
 				}
 			case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
