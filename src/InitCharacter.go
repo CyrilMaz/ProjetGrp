@@ -65,5 +65,5 @@ func initCharacter() {
 
 		}
 	}
-	FirstCharacter = Character{nom, pClass, 1, pPvmax / 2, pPvmax, []Items{Items{"potions de soin", 3, "soin", 20, "all", "Consumable"}}, 100, []Skills{{"coup de poing", true}}, []Equipment{{"Head", false, ""}, {"Body", false, ""}, {"Legs", false, ""}}, 10, true}
+	FirstCharacter = Character{nom, pClass, 1, pPvmax / 2, pPvmax, []Items{Items{"potions de soin", 3, "soin", 20, "all", "Consumable"}}, 100, []Skills{{"coup de poing", true, 5}}, []Equipment{{"Head", false, ""}, {"Body", false, ""}, {"Legs", false, ""}}, 10, true}
 }

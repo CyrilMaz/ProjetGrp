@@ -26,6 +26,7 @@ type Items struct {
 type Skills struct {
 	Name    string
 	Learned bool
+	damage  int
 }
 
 type Equipment struct {
@@ -34,10 +35,9 @@ type Equipment struct {
 	Name string
 }
 
-
 type Monster struct {
-	Name string
-	Pv  int 
-	Pvmax int 
+	Name   string
+	Pv     int
+	Pvmax  int
 	Attack int
 }
