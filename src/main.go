@@ -40,6 +40,10 @@ func main() {
 	fmt.Println("|        0 : Sortir du jeu        |")
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
 	fmt.Print("\n")
+	if lasterror != "" {
+		fmt.Println("Erreur :", lasterror)
+		lasterror = ""
+	}
 
 	fmt.Println("★ Quel est ton choix ? ")
 
@@ -64,6 +68,7 @@ func main() {
 		fmt.Println("Au revoir", FirstCharacter.Name, "!")
 		os.Exit(0)
 	default:
+		lasterror = "Choix invalide, réessaie."
 		main()
 	}
 }

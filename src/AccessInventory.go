@@ -39,9 +39,11 @@ func accessInventory(p *Character) {
 		lasterror = ""
 	} else if ShowlastAction {
 		fmt.Println("Dernière action :", lastAction)
+		lastAction = ""
 		ShowlastAction = false
 	} else if ShowlastAction2 {
 		fmt.Println("Dernière action :", lastAction2)
+		lastAction2 = ""
 		ShowlastAction2 = false
 	}
 	fmt.Println("\n★ tapez le numéro d'un objet pour l'utiliser")
