@@ -18,5 +18,5 @@ func PoisonPot(p *Character) {
 			fmt.Println("Il vous reste", p.Pv, "/", p.Pvmax, "points de vie.")
 		}
 	}
-	RemoveInventory(p, PotionPoison)
+	RemoveInventory(p, PotionPoison, 1)
 }

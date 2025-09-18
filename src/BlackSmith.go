@@ -4,6 +4,7 @@ import "fmt"
 
 var Showlastcraft bool = false
 var lastcraft string = ""
+var lasterror string = ""
 
 func BlackSmith(p *Character) {
 	for spaces := 0; spaces < 40; spaces++ {
@@ -38,7 +39,10 @@ func BlackSmith(p *Character) {
 	fmt.Println("|        0 : Sortir de la forge       |")
 	fmt.Println("|      /inv : Aller à l'inventaire    |")
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
-	if Showlastcraft {
+	if lasterror != "" {
+		fmt.Println("Erreur :", lasterror)
+		lasterror = ""
+	} else if Showlastcraft {
 		fmt.Println("Dernière fabriation :", lastcraft)
 		Showlastcraft = false
 	}
@@ -51,6 +55,8 @@ func BlackSmith(p *Character) {
 		Showlastcraft = true
 		if p.Gold >= 5 && HasItem(p, PlumeCorbeau, 1) && HasItem(p, CuirSanglier, 1) {
 			p.Gold -= 5
+			RemoveInventory(p, PlumeCorbeau, 1)
+			RemoveInventory(p, CuirSanglier, 1)
 			AddInventory(p, ChapeauAventurier)
 			lastcraft = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", ChapeauAventurier.Quantity, ChapeauAventurier.Name)
 		} else if p.Gold < 5 {
@@ -65,6 +71,8 @@ func BlackSmith(p *Character) {
 		Showlastcraft = true
 		if p.Gold >= 5 && HasItem(p, FourrureLoup, 2) && HasItem(p, PeauTroll, 1) {
 			p.Gold -= 5
+			RemoveInventory(p, FourrureLoup, 2)
+			RemoveInventory(p, PeauTroll, 1)
 			AddInventory(p, TuniqueAventurier)
 			lastcraft = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", TuniqueAventurier.Quantity, TuniqueAventurier.Name)
 		} else if p.Gold < 5 {
@@ -79,6 +87,8 @@ func BlackSmith(p *Character) {
 		Showlastcraft = true
 		if p.Gold >= 5 && HasItem(p, FourrureLoup, 1) && HasItem(p, CuirSanglier, 1) {
 			p.Gold -= 5
+			RemoveInventory(p, FourrureLoup, 1)
+			RemoveInventory(p, CuirSanglier, 1)
 			AddInventory(p, BottesAventurier)
 			lastcraft = fmt.Sprintf("Vous avez ajouté %d %s à votre inventaire.", BottesAventurier.Quantity, BottesAventurier.Name)
 		} else if p.Gold < 5 {
