@@ -12,6 +12,6 @@ func GoblinPattern(Goblin *Monster) {
 	if ct == 3 {
 		Goblin.Attack *= 2
 	}
-	ActionTour = fmt.Sprintf("%s inflige %d point de dégat à %s", Goblin.Name, Goblin.Attack, FirstCharacter.Name)
+	ActionTour = fmt.Sprintf("%s inflige %d point de dégats à %s", Goblin.Name, Goblin.Attack, FirstCharacter.Name)
 	ResultatTour = fmt.Sprintf("%s a désormais %d/%d HP", FirstCharacter.Name, FirstCharacter.Pv, FirstCharacter.Pvmax)
 }

@@ -8,21 +8,17 @@ var CompteurTour int
 
 func trainingFight(p *Character, Goblin *Monster) {
 	initGoblin()
-	CompteurTour = 0
+	CompteurTour = 1
 	for p.Pv > 0 && Goblin.Pv > 0 {
+		fmt.Println("\n")
+		fmt.Println("\n")
+		fmt.Println("\n")
 		fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
-		fmt.Println("|        Tour de jeu n°", CompteurTour, "      |")
+		fmt.Println("|        Tour de jeu n°", CompteurTour, "        |")
 		fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
-		if p.Pv > 0 {
-			IsDead(p)
-		} else if Goblin.Pv > 0 {
-			fmt.Println("Vous avez gagné ! ")
-			p.Gold += 50
-			fmt.Println("Vous avez reçu 50 pièces d'or")
-		}
 		CharacterTurn(p)
 		switch PlayerActionTour {
-		case "attack":
+		case 1:
 			for AttackChoice != "1" || AttackChoice != "2" {
 				for i := 1; i < len(FirstCharacter.Skills); i++ {
 					if FirstCharacter.Skills[i-1].Learned {
@@ -34,7 +30,7 @@ func trainingFight(p *Character, Goblin *Monster) {
 				fmt.Scanln(&AttackChoice)
 				switch AttackChoice {
 				case "0":
-					PlayerActionTour = ""
+					PlayerActionTour = 0
 					CharacterTurn(p)
 				case "1":
 					PlayerAttack = CoupDePoing
@@ -44,12 +40,21 @@ func trainingFight(p *Character, Goblin *Monster) {
 					Goblin.Pv -= PlayerAttack.damage
 				default:
 					fmt.Println("Choix invalide, réessayez")
+					CharacterTurn(p)
 				}
 				fmt.Sprintf("%s inflige %d point de dégat à %s", p.Name, PlayerAttack.damage, Goblin.Name)
 				fmt.Sprintf("%s a désormais %d/%d HP", Goblin.Name, Goblin.Pv, Goblin.Pvmax)
 			}
-		case "Inventory":
+		case 2:
 			fmt.Println("")
+			fmt.Println("┏◇─◇──◇────◇ INVENTAIRE ◇─────◇──◇─◇┓")
+			fmt.Println("╠===================================╣")
+			for i := 1; i <= len(p.Inventory); i++ {
+				if p.Inventory[i-1].Quantity > 0 {
+					fmt.Println(" ", i, ":", p.Inventory[i-1].Name, "| quantité:", p.Inventory[i-1].Quantity)
+				}
+			}
+			fmt.Println("┗===================================┛")
 			fmt.Println("")
 			fmt.Println("★¸„.-•~¹°”ˆ˜¨ ACTIONS ¨˜ˆ”°¹~•-.„¸★")
 			fmt.Println("|                                 |")
@@ -84,10 +89,10 @@ func trainingFight(p *Character, Goblin *Monster) {
 								lastAction = fmt.Sprintf("vous avez consommé 1 %s et récupéré %d points de vie", p.Inventory[answer1-1].Name, p.Inventory[answer1-1].StatBoost)
 								ShowlastAction = true
 								TakePot(p) // lien vers la fonction TakePot
-								accessInventory(p)
+								break
 							} else {
 								lasterror = fmt.Sprintf("Pas assez de", p.Inventory[answer1-1].Name)
-								accessInventory(p)
+								CharacterTurn(p)
 							}
 						} else if p.Inventory[answer1-1].Name == "Livre de sorts" {
 							if p.Inventory[answer1-1].Quantity > 0 {
@@ -95,10 +100,10 @@ func trainingFight(p *Character, Goblin *Monster) {
 								lastAction = fmt.Sprintf("vous avez consommé 1 %s et appris le sort Boule de feu", p.Inventory[answer1-1].Name)
 								ShowlastAction = true
 								SpeellBook(p, Fireball) // lien vers la fonction SpellBook
-								accessInventory(p)
+								break
 							} else {
 								lasterror = fmt.Sprintf("Pas assez de", p.Inventory[answer1-1].Name)
-								accessInventory(p)
+								CharacterTurn(p)
 							}
 
 						} else if p.Inventory[answer1-1].Name == "Potion de poison" {
@@ -109,10 +114,10 @@ func trainingFight(p *Character, Goblin *Monster) {
 								ShowlastAction = true
 								fmt.Println("\n★ Appuyez sur entrée pour continuer...")
 								fmt.Scanln()
-								accessInventory(p)
+								break
 							} else {
 								lasterror = fmt.Sprintf("Pas assez de", p.Inventory[answer1-1].Name)
-								accessInventory(p)
+								CharacterTurn(p)
 							}
 
 						} else {
@@ -120,7 +125,7 @@ func trainingFight(p *Character, Goblin *Monster) {
 						}
 					case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
 						lasterror = "annulé"
-						accessInventory(p)
+						CharacterTurn(p)
 					}
 				} else if p.Inventory[answer1-1].Type == "Equipment" {
 					fmt.Println("★ êtes-vous certain de vouloir équiper :", p.Inventory[answer1-1].Name, "? [O/N]")
@@ -145,10 +150,10 @@ func trainingFight(p *Character, Goblin *Monster) {
 									RemoveInventory(p, p.Inventory[answer1-1], 1)
 									lastAction2 = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
 									ShowlastAction2 = true
-									accessInventory(p)
+									break
 								case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
 									lasterror = "annulé"
-									accessInventory(p)
+									CharacterTurn(p)
 								}
 							} else if p.Equipment[0].Name == "" {
 								p.Equipment[0].Name = p.Inventory[answer1-1].Name
@@ -156,7 +161,7 @@ func trainingFight(p *Character, Goblin *Monster) {
 								lastAction = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
 								ShowlastAction = true
 								p.Equipment[0].Worn = true
-								accessInventory(p)
+								CharacterTurn(p)
 							}
 
 							/*##################################
@@ -176,10 +181,10 @@ func trainingFight(p *Character, Goblin *Monster) {
 									RemoveInventory(p, p.Inventory[answer1-1], 1)
 									lastAction2 = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
 									ShowlastAction2 = true
-									accessInventory(p)
+									CharacterTurn(p)
 								case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
 									lasterror = "annulé"
-									accessInventory(p)
+									CharacterTurn(p)
 								}
 							} else if p.Equipment[1].Name == "" {
 								p.Equipment[1].Name = p.Inventory[answer1-1].Name
@@ -187,7 +192,7 @@ func trainingFight(p *Character, Goblin *Monster) {
 								lastAction = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
 								ShowlastAction = true
 								p.Equipment[1].Worn = true
-								accessInventory(p)
+								break
 							}
 
 							/*###################################
@@ -207,10 +212,10 @@ func trainingFight(p *Character, Goblin *Monster) {
 									RemoveInventory(p, p.Inventory[answer1-1], 1)
 									lastAction2 = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
 									ShowlastAction2 = true
-									accessInventory(p)
+									break
 								case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
 									lasterror = "annulé"
-									accessInventory(p)
+									CharacterTurn(p)
 								}
 							} else if p.Equipment[2].Name == "" {
 								p.Equipment[2].Name = p.Inventory[answer1-1].Name
@@ -218,12 +223,12 @@ func trainingFight(p *Character, Goblin *Monster) {
 								lastAction = fmt.Sprintf("vous avez équipé 1 %s", p.Inventory[answer1-1].Name)
 								ShowlastAction = true
 								p.Equipment[2].Worn = true
-								accessInventory(p)
+								break
 							}
 						}
 					case "N", "n", "no", "nO", "No", "NO", "non", "noN", "nOn", "nON", "Non", "NoN", "NOn", "NON":
 						lasterror = "annulé"
-						accessInventory(p)
+						CharacterTurn(p)
 					}
 
 				} else {
@@ -234,16 +239,30 @@ func trainingFight(p *Character, Goblin *Monster) {
 			default:
 				break
 			}
-		case "flee":
+		case 3:
 			fmt.Println("Vous avez fuis, mais, le goblin réussi à vous attaquer.")
 			fmt.Println("Vous perdez donc 5 points de vie...")
 			p.Pv -= 5
-			main()
+			if p.Pv <= 0 {
+				IsDead(p)
+			} else {
+				main()
+			}
+		default:
+			fmt.Println("Choix invalide, réessayez.")
+			CharacterTurn(p)
 		}
 		ct++
 		CompteurTour++
 		GoblinPattern(Goblin)
 		fmt.Println(ActionTour)
 		fmt.Println(ResultatTour)
+	}
+	if p.Pv <= 0 {
+		IsDead(p)
+	} else if Goblin.Pv < 0 {
+		fmt.Println("Vous avez gagné ! ")
+		p.Gold += 50
+		fmt.Println("Vous avez reçu 50 pièces d'or")
 	}
 }
