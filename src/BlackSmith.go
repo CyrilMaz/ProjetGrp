@@ -39,6 +39,8 @@ func BlackSmith(p *Character) {
 	fmt.Println("|        0 : Sortir de la forge       |")
 	fmt.Println("|      /inv : Aller à l'inventaire    |")
 	fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+	fmt.Print("\n")
+	fmt.Println("★ Quel est ton choix ? ")
 	if lasterror != "" {
 		fmt.Println("Erreur :", lasterror)
 		lasterror = ""
@@ -113,6 +115,7 @@ func BlackSmith(p *Character) {
 		AddInventory(p, CuirSanglier)
 		AddInventory(p, PlumeCorbeau)
 	default:
+		lasterror = "Choix invalide, réessaie."
 		BlackSmith(p)
 	}
 }
