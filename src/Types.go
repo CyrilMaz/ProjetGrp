@@ -1,15 +1,17 @@
 package main
 
 type Character struct {
-	Name      string
-	Class     string
-	Level     int
-	Pv        int
-	Pvmax     int
-	Inventory []Items
-	Gold      int
-	Skills    []Skills
-	Equipment []Equipment
+	Name                 string
+	Class                string
+	Level                int
+	Pv                   int
+	Pvmax                int
+	Inventory            []Items
+	Gold                 int
+	Skills               []Skills
+	Equipment            []Equipment
+	MaxInventory         int
+	InventoryUpgradeUsed bool
 }
 
 type Items struct {
