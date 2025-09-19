@@ -40,11 +40,13 @@ func DisplayInfo(FirstCharacter *Character) {
 	}
 	fmt.Println("\nÉquipements portés :")
 	for i := 0; i < len(FirstCharacter.Equipment); i++ {
-		fmt.Print(FirstCharacter.Equipment[i].Name)
-		if i == len(FirstCharacter.Equipment)-1 {
-			fmt.Print(".")
-		} else {
-			fmt.Print(", ")
+		if FirstCharacter.Equipment[i].Worn {
+			fmt.Print(FirstCharacter.Equipment[i].Name)
+			if i+1 > len(FirstCharacter.Equipment) {
+				fmt.Print(".")
+			} else if i < len(FirstCharacter.Equipment) {
+				fmt.Print(", ")
+			}
 		}
 	}
 	fmt.Print("\n")
