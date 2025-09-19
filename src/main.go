@@ -22,7 +22,7 @@ func main() {
 		fmt.Println("║                                              ║")
 		fmt.Println("║      BIENVENUE DANS LE MONDE D'AVENTURE      ║")
 		fmt.Println("║                                              ║")
-		fmt.Println("║        ──◇◆◇──  Projet Groupe  ──◇◆◇──       ║")
+		fmt.Println("║        ──◇◆◇──  FORGE  DESTIN  ──◇◆◇──       ║")
 		fmt.Println("║                                              ║")
 		fmt.Println("║    Prépare-toi à forger ton destin, héros !  ║")
 		fmt.Println("║                                              ║")
