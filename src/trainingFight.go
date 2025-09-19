@@ -1,10 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 var AttackChoice string
 var PlayerAttack Skills
 var CompteurTour int
+var lastPlayerAction string
+var lastPlayerAction2 string
+var ShowLastPlayerAction bool = false
 
 func trainingFight(p *Character, Goblin *Monster) {
 	initGoblin()
@@ -18,34 +24,48 @@ func trainingFight(p *Character, Goblin *Monster) {
 		fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
 		CharacterTurn(p)
 		switch PlayerActionTour {
-		case 1:
-			for AttackChoice != "1" || AttackChoice != "2" {
-				for i := 1; i < len(FirstCharacter.Skills); i++ {
-					if FirstCharacter.Skills[i-1].Learned {
-						fmt.Println("", i, "☆", FirstCharacter.Skills[i-1].Name)
-					}
+		case "1": // attaque
+			fmt.Println("")
+			fmt.Println("★¸„.-•~¹°”ˆ˜¨ ACTIONS ¨˜ˆ”°¹~•-.„¸★")
+			for i := 0; i < len(FirstCharacter.Skills); i++ {
+				if FirstCharacter.Skills[i].Learned {
+					fmt.Println("", i+1, ": ☆", FirstCharacter.Skills[i].Name, "")
 				}
-				fmt.Println("Quel attaque voulez vous faire ?")
-				fmt.Println("0 : pour revenir en arrière")
-				fmt.Scanln(&AttackChoice)
-				switch AttackChoice {
-				case "0":
-					PlayerActionTour = 0
-					CharacterTurn(p)
-				case "1":
-					PlayerAttack = CoupDePoing
-					Goblin.Pv -= PlayerAttack.damage
-				case "2":
-					PlayerAttack = Fireball
-					Goblin.Pv -= PlayerAttack.damage
-				default:
-					fmt.Println("Choix invalide, réessayez")
-					CharacterTurn(p)
-				}
-				fmt.Sprintf("%s inflige %d point de dégat à %s", p.Name, PlayerAttack.damage, Goblin.Name)
-				fmt.Sprintf("%s a désormais %d/%d HP", Goblin.Name, Goblin.Pv, Goblin.Pvmax)
 			}
-		case 2:
+			fmt.Println("")
+			fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+			fmt.Println("|        0 revenir au combat      |")
+			fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+			fmt.Println("")
+			fmt.Println("☆ Quelle attaque voulez-vous faire ?")
+			fmt.Scanln(&AttackChoice)
+			switch AttackChoice {
+			case "0":
+				PlayerActionTour = ""
+				CharacterTurn(p)
+			case "1":
+				PlayerAttack = CoupDePoing
+				Goblin.Pv -= PlayerAttack.damage
+				ShowLastPlayerAction = true
+				lastPlayerAction = fmt.Sprintf("%s inflige %d point de dégat à %s", p.Name, PlayerAttack.damage, Goblin.Name)
+				lastPlayerAction2 = fmt.Sprintf("%s a désormais %d/%d HP", Goblin.Name, Goblin.Pv, Goblin.Pvmax)
+			case "2":
+				PlayerAttack = Fireball
+				Goblin.Pv -= PlayerAttack.damage
+				ShowLastPlayerAction = true
+				lastPlayerAction = fmt.Sprintf("%s inflige %d point de dégat à %s", p.Name, PlayerAttack.damage, Goblin.Name)
+				lastPlayerAction2 = fmt.Sprintf("%s a désormais %d/%d HP", Goblin.Name, Goblin.Pv, Goblin.Pvmax)
+			case "/OS":
+				PlayerAttack.damage = Goblin.Pv
+				Goblin.Pv = 0
+				ShowLastPlayerAction = true
+				lastPlayerAction = fmt.Sprintf("%s inflige %d point de dégat à %s", p.Name, PlayerAttack.damage, Goblin.Name)
+				lastPlayerAction2 = fmt.Sprintf("%s a désormais %d/%d HP", Goblin.Name, Goblin.Pv, Goblin.Pvmax)
+			default:
+				fmt.Println("Choix invalide, réessayez")
+				CharacterTurn(p)
+			}
+		case "2":
 			fmt.Println("")
 			fmt.Println("┏◇─◇──◇────◇ INVENTAIRE ◇─────◇──◇─◇┓")
 			fmt.Println("╠===================================╣")
@@ -86,9 +106,9 @@ func trainingFight(p *Character, Goblin *Monster) {
 						if p.Inventory[answer1-1].Name == "potions de soin" {
 							if p.Inventory[answer1-1].Quantity > 0 {
 								p.Inventory[answer1-1].Quantity -= 1
-								lastAction = fmt.Sprintf("vous avez consommé 1 %s et récupéré %d points de vie", p.Inventory[answer1-1].Name, p.Inventory[answer1-1].StatBoost)
 								ShowlastAction = true
 								TakePot(p) // lien vers la fonction TakePot
+								fmt.Sprintf("vous avez consommé 1 %s et récupéré %d points de vie", p.Inventory[answer1-1].Name, p.Inventory[answer1-1].StatBoost)
 								break
 							} else {
 								lasterror = fmt.Sprintf("Pas assez de", p.Inventory[answer1-1].Name)
@@ -239,7 +259,7 @@ func trainingFight(p *Character, Goblin *Monster) {
 			default:
 				break
 			}
-		case 3:
+		case "3":
 			fmt.Println("Vous avez fuis, mais, le goblin réussi à vous attaquer.")
 			fmt.Println("Vous perdez donc 5 points de vie...")
 			p.Pv -= 5
@@ -252,17 +272,44 @@ func trainingFight(p *Character, Goblin *Monster) {
 			fmt.Println("Choix invalide, réessayez.")
 			CharacterTurn(p)
 		}
+		if ShowLastPlayerAction {
+			fmt.Println(lastPlayerAction)
+			lastPlayerAction = ""
+			fmt.Println(lastPlayerAction2)
+			lastPlayerAction2 = ""
+			ShowLastPlayerAction = false
+		}
+		if Goblin.Pv <= 0 {
+			fmt.Println("Vous avez gagné ! ")
+			p.Gold += 50
+			fmt.Println("Vous avez reçu 50 pièces d'or")
+			break
+		}
+		fmt.Println("\n")
+		fmt.Println("\n")
+		fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+		fmt.Println("|     au tour de l'adversaire     |")
+		fmt.Println("★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★")
+		fmt.Print("Réflexion... : ")
+		loading := []string{"▂", "▃", "▄", "▅", "▆", "▇", "▉"}
+		for i := 0; i < 7; i++ { // 8*0.50s ≈ 4s
+			fmt.Print(loading[i%len(loading)])
+			time.Sleep(500 * time.Millisecond)
+		}
 		ct++
 		CompteurTour++
-		GoblinPattern(Goblin)
+		fmt.Println("")
+		GoblinPattern(Goblin, p)
+		p.Pv -= Goblin.Attack
 		fmt.Println(ActionTour)
 		fmt.Println(ResultatTour)
 	}
 	if p.Pv <= 0 {
 		IsDead(p)
-	} else if Goblin.Pv < 0 {
-		fmt.Println("Vous avez gagné ! ")
-		p.Gold += 50
-		fmt.Println("Vous avez reçu 50 pièces d'or")
 	}
+	for i := 0; i < 7; i++ { // 8*0.50s ≈ 4s
+		time.Sleep(5 * time.Second)
+		main()
+	}
+	main()
 }

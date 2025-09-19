@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 var choice int
-var PlayerActionTour int
+var PlayerActionTour string
 
 func CharacterTurn(p *Character) string {
 
@@ -26,14 +26,14 @@ func CharacterTurn(p *Character) string {
 	switch choice {
 	case 1:
 		fmt.Println(p.Name, "a décidé d'attaquer")
-		PlayerActionTour = 1
+		PlayerActionTour = "1"
 		// faire la fonction d'attaque ici
 	case 2:
 		fmt.Println(p.Name, "a ouvert son inventaire")
-		PlayerActionTour = 2
+		PlayerActionTour = "2"
 	case 0:
 		fmt.Println(p.Name, "a décidé de prendre la fuite")
-		PlayerActionTour = 0
+		PlayerActionTour = "0"
 		// Logique de passage de tour ici
 	default:
 		lasterror = "Choix invalide, veuillez réessayer."
